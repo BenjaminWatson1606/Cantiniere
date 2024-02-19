@@ -1,0 +1,7 @@
+{
+  "name": "Cantiniere",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
