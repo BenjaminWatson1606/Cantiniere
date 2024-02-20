@@ -1,0 +1,71 @@
+.custom-header {
+  background: rgb(29, 29, 29);
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  padding: 10px;
+}
+
+.header-title {
+  text-align: right;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.container {
+  background: white;
+  height: 100%;
+  padding: 10px;
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.svg-container {
+  margin-right: auto;
+}
+
+.input-container {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  margin-right: 100px;
+}
+
+.input {
+  margin-bottom: 10px;
+  width: 140%;
+  background-color: white;
+  border-radius: 15px;
+  padding: 5px;
+
+  color: #000000;
+}
+
+.submit-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 10px;
+}
+
+.submit-button,
+.cancel-button {
+  background-color: #e1a325;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background-color: #888888;
+}

@@ -4,7 +4,6 @@
   --background: rgb(29, 29, 29) !important;
 }
 
-
 // header logo
 .logo {
   margin-left: 10px;
@@ -22,18 +21,19 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  background-color: white;
 }
 
 .panel {
   width: 250px;
   height: 250px;
-  border-radius: 2rem;
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background-image: url('../../assets/Pictures/panel_picture.png');
+  background-image: url("../../assets/Pictures/panel_picture.png");
   background-size: cover;
   background-position: center;
   margin: 100px;
@@ -66,4 +66,9 @@
 
 .sub-panel:hover {
   background-color: lightgray;
+}
+
+.custom-modal-background {
+  background-color: white !important;
+  border-radius: 10px !important;
 }

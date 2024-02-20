@@ -1,5 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-folder',
@@ -8,10 +10,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FolderPage implements OnInit {
   public folder!: string;
-  private activatedRoute = inject(ActivatedRoute);
-  constructor() {}
+
+  constructor(
+    private modalController: ModalController,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
+  }
+
+  async openLoginModal() {
+    const modal = await this.modalController.create({
+      component: LoginComponent,
+      cssClass: 'custom-modal-background',
+    });
+    return await modal.present();
   }
 }
