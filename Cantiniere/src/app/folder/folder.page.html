@@ -1,21 +1,48 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar class="header">
+    <ion-button slot="start" fill="clear">
+      <img class="logo" src="/assets/Pictures/logo.png" alt="Logo" width="50" height="50">
+    </ion-button>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-button shape="round" fill="solid" color="warning">Plat de la semaine</ion-button>
+      <ion-button shape="round" fill="solid" color="warning">Carte</ion-button>
     </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
+    <div class="white_text" slot="end">⏱︎ Commandes acceptées jusqu'à 10h30</div>
+    <ion-buttons slot="end">
+      <ion-button shape="round" fill="solid" color="warning">Se Connecter</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+
+<div class="container">
+  <div class="panel">
+    <h2>Lundi</h2>
+    <a href="#" class="sub-panel">Plat 1</a>
+    <a href="#" class="sub-panel">Plat 2</a>
   </div>
-</ion-content>
+  <div class="panel">
+    <h2>Mardi</h2>
+    <a href="#" class="sub-panel">Plat 1</a>
+    <a href="#" class="sub-panel">Plat 2</a>
+  </div>
+  <div class="panel">
+    <h2>Mercredi</h2>
+    <a href="#" class="sub-panel">Plat 1</a>
+    <a href="#" class="sub-panel">Plat 2</a>
+  </div>
+</div>
+<div class="container">
+  <div class="panel">
+    <h2>Jeudi</h2>
+    <a href="#" class="sub-panel">Plat 1</a>
+    <a href="#" class="sub-panel">Plat 2</a>
+  </div>
+  <div class="panel">
+    <h2>Vendredi</h2>
+    <a href="#" class="sub-panel">Plat 1</a>
+    <a href="#" class="sub-panel">Plat 2</a>
+  </div>
+
+</div>

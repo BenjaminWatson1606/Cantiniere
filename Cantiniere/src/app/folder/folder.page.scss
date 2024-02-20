@@ -1,28 +1,69 @@
-ion-menu-button {
-  color: var(--ion-color-primary);
+// HEADER
+// header color
+.header {
+  --background: rgb(29, 29, 29) !important;
 }
 
-#container {
-  text-align: center;
+
+// header logo
+.logo {
+  margin-left: 10px;
+}
+
+// header text
+.white_text {
+  color: white;
+  font-size: 14px !important;
+  margin-right: 10px;
+}
+
+// PANELS
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.panel {
+  width: 250px;
+  height: 250px;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-image: url('../../assets/Pictures/panel_picture.png');
+  background-size: cover;
+  background-position: center;
+  margin: 100px;
+  position: relative;
+}
+
+.panel h2 {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  top: -50px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-  color: #8c8c8c;
-  margin: 0;
-}
-
-#container a {
+.sub-panel {
+  align-items: center;
+  margin-bottom: 10px;
+  width: 230px;
+  height: 80px;
+  background-color: white;
+  border-radius: 1rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 100px;
   text-decoration: none;
+  display: block;
+  color: black;
+}
+
+.sub-panel:hover {
+  background-color: lightgray;
 }
