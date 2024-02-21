@@ -1,0 +1,72 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  background-color: white;
+}
+
+.header-title {
+  text-align: right;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.svg-container {
+  margin-right: 20px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input {
+  margin-bottom: 10px;
+  width: 240px;
+  background-color: white;
+  border-radius: 15px;
+  padding: 8px;
+  color: #000000;
+}
+
+.submit-container,
+.cancel-container {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.submit-button,
+.cancel-button {
+  background-color: #e1a325;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background-color: #888888;
+}
+
+.sex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.sex-label {
+  color: black;
+  text-align: center;
+  padding-left: 10px;
+}

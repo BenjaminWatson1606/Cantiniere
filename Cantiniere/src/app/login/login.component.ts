@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {
   ModalController,
   LoadingController,
   ToastController,
 } from '@ionic/angular';
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../services/auth/login.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   async onLogin() {
     const loading = await this.loadingController.create({
-      message: 'Logging in...',
+      message: 'Connexion...',
     });
 
     try {
@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.email, this.password).subscribe(
         (response) => {
           console.log('Login response:', response);
+          this.presentSuccessToast('Connexion réussi');
         },
         (error) => {
           console.error('Login error:', error);
@@ -57,6 +58,16 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  async presentSuccessToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: 'success',
+    });
+    toast.present();
+  }
+
   async presentErrorToast(message: string) {
     const toast = await this.toastController.create({
       message: message,
@@ -69,5 +80,13 @@ export class LoginComponent implements OnInit {
 
   async closeModal() {
     await this.modalController.dismiss();
+  }
+
+  
+  @Output() registerClicked = new EventEmitter<{ role: string }>();
+
+  onRegisterClick() {
+    console.log('Register button clicked');
+    this.modalController.dismiss({ role: 'register' });
   }
 }

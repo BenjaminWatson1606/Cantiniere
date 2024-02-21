@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { LoginComponent } from '../login/login.component';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-folder',
@@ -23,8 +24,33 @@ export class FolderPage implements OnInit {
   async openLoginModal() {
     const modal = await this.modalController.create({
       component: LoginComponent,
-      cssClass: 'custom-modal-background',
+      componentProps: {},
+      cssClass: 'custom-modal-content',
+      backdropDismiss: true,
+      mode: 'ios',
+      presentingElement: await this.modalController.getTop(),
     });
+
+    modal.onDidDismiss().then((result) => {
+      console.log('Modal dismissed with result:', result);
+      if (result.data?.role === 'register') {
+        this.openRegisterModal();
+      }
+    });
+    
+
     return await modal.present();
+  }
+
+  async openRegisterModal() {
+    const registerModal = await this.modalController.create({
+      component: RegisterComponent,
+      cssClass: 'custom-modal-content', 
+      backdropDismiss: true,
+      mode: 'ios',
+      presentingElement: await this.modalController.getTop(),
+    });
+
+    await registerModal.present();
   }
 }

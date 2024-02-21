@@ -1,5 +1,4 @@
 <div class="header-title">Se connecter</div>
-
 <div class="container">
   <div class="main">
     <div class="svg-container">
@@ -15,6 +14,7 @@
           fill="#E1A325"
         />
       </svg>
+      <button class="register-button" (click)="onRegisterClick()">S'inscrire</button>
     </div>
 
     <div class="input-container">
@@ -32,11 +32,11 @@
         [(ngModel)]="password"
         placeholder="Mot de passe"
       />
-    </div>
-  </div>
 
-  <div class="submit-container">
-    <button class="submit-button" (click)="onLogin()">Se connecter</button>
-    <button class="cancel-button" (click)="closeModal()">Annuler</button>
+      <div class="submit-container">
+        <button class="submit-button" (click)="onLogin()">Se connecter</button>
+        <button class="cancel-button" (click)="closeModal()">Annuler</button>
+      </div>
+    </div>
   </div>
 </div>

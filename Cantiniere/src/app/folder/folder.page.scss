@@ -68,7 +68,15 @@
   background-color: lightgray;
 }
 
-.custom-modal-background {
+::ng-deep .ion-page.custom-modal .ion-content {
   background-color: white !important;
   border-radius: 10px !important;
+  width: 500px !important;
+  height: 100px !important;
+}
+
+.custom-modal-content {
+  background-color: white !important;
+  border-radius: 10px !important;
+  width: 100px !important;
 }
