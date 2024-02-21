@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Meal } from '../interfaces/meal-model';
+import { Meal } from '../../interfaces/meal-model';
 
 @Injectable({
   providedIn: 'root'

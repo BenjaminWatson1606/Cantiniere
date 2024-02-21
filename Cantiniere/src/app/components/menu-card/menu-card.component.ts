@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Meal } from 'src/app/interfaces/meal-model';
 import { Menu } from 'src/app/interfaces/menu-model';
-import { MealService } from 'src/app/services/meal-service.service';
+import { MealService } from 'src/app/services/menu/meal-service.service';
 
 @Component({
   selector: 'app-menu-card',
