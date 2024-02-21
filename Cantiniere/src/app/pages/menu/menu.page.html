@@ -1,0 +1,113 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Carte admin</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Buttons -->
+<ion-content>
+  <div *ngIf="categories" class="button-list-container">
+    <ion-list *ngFor="let category of categories" class="button-list">
+      <ion-button
+        size="small"
+        color="warning"
+        [class.selected-button]="category === selectedCategory"
+        (click)="selectCategory(category)"
+        >{{ getCategoryName(category) }}
+      </ion-button>
+    </ion-list>
+  </div>
+  
+  <!-- Meals table -->
+  <div>
+    <ion-grid class="meal-grid">
+      <ion-row class="meal-grid-row">
+        <ion-col>Libellé</ion-col>
+        <ion-col>Prix</ion-col>
+        <ion-col>Éditer</ion-col>
+        <ion-col>Supprimer</ion-col>
+      </ion-row>
+      @if(isMealsEmpty()){
+        <ion-row *ngFor="let meal of selectedMeals">
+          @if(!meal.edited){
+            <ion-col>
+              <p 
+              class="grid-item-text"
+              (click)="editMeal(meal)"
+              >{{ meal.label }}</p>
+            </ion-col>
+            <ion-col>
+              <p 
+              class="grid-item-text"
+              (click)="editMeal(meal)"
+              >{{ meal.price }}€</p>
+            </ion-col>
+            <ion-col>
+              <ion-button 
+                fill="none"
+                (click)="editMeal(meal)">
+                <ion-icon name="create-outline"/>
+              </ion-button>
+            </ion-col>        
+            <ion-col>
+              <ion-button 
+                fill="none"
+                (click)="removeMeal(meal)">
+                <ion-icon name="trash-outline"/>
+              </ion-button>
+            </ion-col>
+          }
+          @else {
+            <ion-col>
+              <!-- Label input-->
+              <ion-input 
+                required
+                [(ngModel)]="meal.label"
+                #label="ngModel">
+              </ion-input>
+            </ion-col>
+            <ion-col style="display: flex;">
+              <!-- Price input -->
+              <ion-input
+                type="number"
+                required
+                [(ngModel)]="meal.price"
+                #price="ngModel">
+              </ion-input>
+              <p>(€)</p>
+            </ion-col>
+            <ion-col size="6">
+              @if(label.valid && price.valid){
+                <!-- Validate button -->
+                  <ion-button 
+                    fill="none"
+                    (click)="submitMeal(meal)">
+                    <ion-icon name="checkmark-outline"/>
+                  </ion-button>
+                }
+              @else {
+                @if(!label.valid){
+                  <!-- Label invalid -->
+                  <p class="invalid-text">Le champ Libellé n'a pas été bien rempli.</p>
+                }
+                @else if (!price.valid) {
+                  <!-- Price invalid -->
+                  <p class="invalid-text">Le champ Prix n'a pas été bien rempli.</p>
+                }
+              }
+            </ion-col>
+          }
+        </ion-row>
+      }
+      @else{
+        <ion-row>
+          <ion-col>
+            <div class="empty-meal-text">
+              Aucun plat trouvé pour la catégorie {{ getCategoryName(selectedCategory) }}
+            </div>
+          </ion-col>
+        </ion-row>
+      }
+    </ion-grid>
+  </div>
+</ion-content>
