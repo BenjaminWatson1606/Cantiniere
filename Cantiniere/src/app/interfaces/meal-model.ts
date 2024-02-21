@@ -3,5 +3,5 @@ export interface Meal {
     price: number;
     category: string;
     categoryIndex: number;
-    edited?: string;
+    edited?: boolean;
 }
