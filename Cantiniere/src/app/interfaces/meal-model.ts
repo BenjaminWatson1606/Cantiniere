@@ -1,7 +1,7 @@
 export interface Meal {
     label: string;
-    price: number;
+    price: number|null;
     category: string;
-    categoryIndex: number;
+    categoryIndex?: number;
     edited?: boolean;
 }

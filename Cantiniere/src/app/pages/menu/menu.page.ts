@@ -17,6 +17,8 @@ export class MenuPage implements OnInit {
   selectedCategory!: string;
   selectedMeals: Array<Meal> | undefined;
 
+  newMeal: Meal = {label: "", price: null, category: ''};
+
   constructor(
     private mealService: MealService,
     private menuService: MenuService
@@ -98,5 +100,18 @@ export class MenuPage implements OnInit {
         this.menu.categories[index].meals.splice(mealIndex, 1);
       }
     }
+  }
+
+  /**
+   * Add a new meal in the menu
+   */
+  submitMealForm(){
+    this.newMeal.category = this.selectedCategory;
+    const index = this.menu.categories.findIndex(x => x.label == this.newMeal.category)
+    if(index >= 0){
+      this.menu.categories[index].meals.push(this.newMeal);
+    }
+
+    this.newMeal = {label: "", price: null, category: ''};
   }
 }

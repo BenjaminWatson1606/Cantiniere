@@ -72,4 +72,14 @@ export class MealService {
     const index = this.categories.findIndex(x => x == category);
     return index >= 0 ? this.categoryNames[index] : undefined;
   }
+
+  /**
+   * Return the index of a given category
+   * @param category The category to get the index of
+   * @returns Returns the category index as a number or undefined (of the category doesn't exist)
+   */
+  getCategoryId(category: string): number | undefined{
+    const index = this.categories.findIndex(x => x == category);
+    return index >= 0 ? index : undefined;
+  }
 }

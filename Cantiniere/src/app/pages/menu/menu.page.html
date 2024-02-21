@@ -17,7 +17,42 @@
       </ion-button>
     </ion-list>
   </div>
-  
+
+  <!-- Add meals -->
+  <div>
+    <form class="input-container" (ngSubmit)="submitMealForm()" #mealForm="ngForm">
+      <!-- Input label -->
+      <ion-input 
+      labelPlacement="stacked"
+      fill="outline"
+      label="Libellé"
+      placeholder="Entrez le libellé du nouveau plat..."
+      required
+      [(ngModel)]="newMeal.label" 
+      name="label"
+      #newLabel="ngModel"/>
+      <!-- Input price -->
+      
+      <ion-input 
+      type="number"
+      labelPlacement="stacked"
+      fill="outline"
+      label="Prix (€)"
+      placeholder="Entrez le prix du nouveau plat..."
+      required
+      [(ngModel)]="newMeal.price" 
+      name="price"
+      #newPrice="ngModel"/>
+
+      <!-- Add button -->
+      <ion-button
+      type="submit"
+      color="warning"
+      [disabled]="!newLabel.valid || !newPrice.valid"
+      >Ajouter</ion-button>
+    </form>
+  </div>
+
   <!-- Meals table -->
   <div>
     <ion-grid class="meal-grid">
