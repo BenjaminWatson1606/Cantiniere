@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Meal } from 'src/app/interfaces/meal-model';
 import { Menu } from 'src/app/interfaces/menu-model';
-import { MealService } from 'src/app/services/menu/meal-service.service';
 import { MenuService } from 'src/app/services/menu/menu.service';
 
 @Component({
@@ -17,16 +16,13 @@ export class MenuPage implements OnInit {
   selectedCategory!: string;
   selectedMeals: Array<Meal> | undefined;
 
-  newMeal: Meal = {label: "", price: null, category: ''};
+  newMeal: Meal = {label: "", price: null, category: '', categoryIndex: 0};
 
-  constructor(
-    private mealService: MealService,
-    private menuService: MenuService
-    ) { }
+  constructor(private menuService: MenuService) { }
 
   ngOnInit() {
-    this.categories = this.mealService.categories;
-    this.menu = this.menuService.getMenu(this.mealService.getMeals());
+    this.menu = this.menuService.menu;
+    this.categories = this.menuService.categories;
     this.selectCategory(this.categories[3]);
   }
   
@@ -36,7 +32,7 @@ export class MenuPage implements OnInit {
    * @returns Returns the name of the category as a string or undefined (if the category doesn't exist in the array)
    */
   getCategoryName(category: string): string|undefined {
-    return this.mealService.getCategoryName(category);
+    return this.menuService.getCategoryName(category);
   }
 
   /**
@@ -44,21 +40,13 @@ export class MenuPage implements OnInit {
    * @param category Value of the new selected category
    */
   selectCategory(category: string){
-    if(this.selectedCategory == category)
+    if(this.selectedCategory == category){
       return;
+    }
 
+    //Set selectedCategory and get its meals from the service
     this.selectedCategory = category;
-    this.selectedMeals = this.getMealsFromCategory(category);
-  }
-
-  /**
-   * Get meals for a given category in the menu
-   * @param category The category to get meals from
-   * @returns Returns an array of Meals or undefined (if the category doesn't exist)
-   */
-  getMealsFromCategory(category: string): Array<Meal> | undefined{
-    const index = this.menu.categories.findIndex(x => x.label == category);
-    return index >= 0 ? this.menu.categories[index].meals : undefined;
+    this.selectedMeals = this.menuService.getMealsFromCategory(category);
   }
 
   /**
@@ -93,25 +81,21 @@ export class MenuPage implements OnInit {
    * @param meal The meal that will be removed
    */
   removeMeal(meal: Meal){
-    const index = this.menu.categories.findIndex(x => x.label == meal.category)
-    if(index >= 0){
-      const mealIndex = this.menu.categories[index].meals.findIndex(m => m == meal);
-      if(mealIndex >= 0){
-        this.menu.categories[index].meals.splice(mealIndex, 1);
-      }
-    }
+    this.menuService.removeMealToMenu(meal);
+    this.menu = this.menuService.menu;
   }
 
   /**
    * Add a new meal in the menu
    */
   submitMealForm(){
+    //Set new meal category and category index
     this.newMeal.category = this.selectedCategory;
-    const index = this.menu.categories.findIndex(x => x.label == this.newMeal.category)
-    if(index >= 0){
-      this.menu.categories[index].meals.push(this.newMeal);
-    }
+    this.newMeal.categoryIndex = this.menuService.getCategoryId(this.newMeal.category);
 
-    this.newMeal = {label: "", price: null, category: ''};
+    //Add the meal to the menu
+    this.menuService.addMealToMenu(this.newMeal);
+    this.newMeal = {label: "", price: null, category: '', categoryIndex: 0}
+    this.menu = this.menuService.menu;
   }
 }

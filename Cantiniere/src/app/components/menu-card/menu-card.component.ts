@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Menu } from 'src/app/interfaces/menu-model';
-import { MealService } from 'src/app/services/menu/meal-service.service';
 import { MenuService } from 'src/app/services/menu/menu.service';
 
 @Component({
@@ -12,13 +11,10 @@ export class MenuCardComponent  implements OnInit {
 
   menu!: Menu;
 
-  constructor(
-    private mealService: MealService,
-    private menuService: MenuService
-    ) {}
+  constructor(private menuService: MenuService) {}
 
   ngOnInit() {
-    this.menu = this.menuService.getMenu(this.mealService.getMeals());
+    this.menu = this.menuService.menu;
   }
   
   /**
@@ -27,6 +23,6 @@ export class MenuCardComponent  implements OnInit {
    * @returns Returns the name of the category as a string or undefined (if the category doesn't exist in the array)
    */
   getCategoryName(category: string): string|undefined {
-    return this.mealService.getCategoryName(category);
+    return this.menuService.getCategoryName(category);
   }
 }
