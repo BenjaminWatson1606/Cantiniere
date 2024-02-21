@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
+import { MenuCardComponent } from '../components/menu-card/menu-card.component';
 
 @Component({
   selector: 'app-folder',
@@ -52,5 +53,13 @@ export class FolderPage implements OnInit {
     });
 
     await registerModal.present();
+  }
+  
+  async openMenuCard() {
+    const modal = await this.modalController.create({
+      component: MenuCardComponent,
+      cssClass: 'custom-modal-background',
+    });
+    return await modal.present();
   }
 }

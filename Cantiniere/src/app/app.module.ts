@@ -9,9 +9,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import { MenuCardComponent } from './components/menu-card/menu-card.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MenuCardComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
