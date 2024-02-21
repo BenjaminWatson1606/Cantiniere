@@ -1,12 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title  >Carte</ion-title>
+    <ion-title>Carte</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-grid col-2 *ngIf="menu" class="grid-container">
   <div *ngFor="let category of menu.categories" class="grid-element">
-    <h3 class="title">{{ category.label }}</h3>
+    <h3 class="title">{{ getCategoryName(category.label) }}</h3>
     <div *ngFor="let meal of category.meals">
       <p class="text">{{ meal.label }}.............{{ meal.price }}€</p>
     </div>

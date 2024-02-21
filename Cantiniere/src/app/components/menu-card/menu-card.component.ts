@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Meal } from 'src/app/interfaces/meal-model';
 import { Menu } from 'src/app/interfaces/menu-model';
 import { MealService } from 'src/app/services/menu/meal-service.service';
 import { MenuService } from 'src/app/services/menu/menu.service';
@@ -22,4 +21,7 @@ export class MenuCardComponent  implements OnInit {
     this.menu = this.menuService.getMenu(this.mealService.getMeals());
   }
   
+  getCategoryName(category: string): string|undefined {
+    return this.mealService.getCategoryName(category);
+  }
 }
