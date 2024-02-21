@@ -4,7 +4,7 @@
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
-    align-items: end;
+    align-items: flex-end;
     padding: 10px;
 }
 
@@ -68,4 +68,25 @@
 
 .cancel-button {
     background-color: #888888;
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    align-content: start;
+    margin : 0.2%;
+}   
+
+.grid-element{
+    background-color: white;
+    padding-left: 1%;
+}
+
+.title{
+    font-weight: bold;
+    text-decoration: underline;
+    margin: 2% auto;
+}
+.text{
+    margin: 5% 0;
 }

@@ -1,42 +1,14 @@
-<div class="header-title">Se connecter</div>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Carte</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-<div class="container">
-  <div class="main">
-    <div class="svg-container">
-      <svg
-        width="190"
-        height="202"
-        viewBox="0 0 190 202"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M189.451 100.925C163.485 100.59 142.519 78.1651 142.519 50.4814C116.479 50.4814 95.3899 28.1948 95.0707 0.593882C84.9548 -1.03945 74.6124 0.712239 65.4873 5.65167L39.8337 19.5468C30.5988 24.5503 23.0914 32.5344 18.3883 42.3542L5.36297 69.529C0.645852 79.3737 -1.01947 90.5531 0.60557 101.466L5.08836 131.556C6.71179 142.458 11.5388 152.534 18.8781 160.34L39.2028 181.945C46.5189 189.725 55.9643 194.843 66.1849 196.566L94.6514 201.359C104.86 203.079 115.321 201.316 124.535 196.325L150.189 182.434C159.423 177.429 166.93 169.445 171.634 159.626L184.66 132.452C189.321 122.731 190.972 111.708 189.451 100.925ZM65.3129 145.183C58.7557 145.183 53.4379 139.529 53.4379 132.558C53.4379 125.587 58.7557 119.933 65.3129 119.933C71.8701 119.933 77.1878 125.587 77.1878 132.558C77.1878 139.529 71.8701 145.183 65.3129 145.183ZM77.1878 82.0591C70.6306 82.0591 65.3129 76.4055 65.3129 69.4343C65.3129 62.4631 70.6306 56.8096 77.1878 56.8096C83.745 56.8096 89.0628 62.4631 89.0628 69.4343C89.0628 76.4055 83.745 82.0591 77.1878 82.0591ZM136.563 132.558C130.005 132.558 124.688 126.905 124.688 119.933C124.688 112.962 130.005 107.309 136.563 107.309C143.12 107.309 148.437 112.962 148.437 119.933C148.437 126.905 143.12 132.558 136.563 132.558Z"
-          fill="#E1A325"
-        />
-      </svg>
+<ion-grid col-2 *ngIf="menu" class="grid-container">
+  <div *ngFor="let category of menu.categories" class="grid-element">
+    <h3 class="title">{{ category.label }}</h3>
+    <div *ngFor="let meal of category.meals">
+      <p class="text">{{ meal.label }}.............{{ meal.price }}€</p>
     </div>
-
-    <!-- <div class="input-container">
-      <input
-        class="input"
-        type="text"
-        id="email"
-        [(ngModel)]="email"
-        placeholder="Identifiant"
-      />
-      <input
-        class="input"
-        type="password"
-        id="password"
-        [(ngModel)]="password"
-        placeholder="Mot de passe"
-      />
-    </div>
-  </div> -->
-
-  <!-- <div class="submit-container">
-    <button class="submit-button" (click)="onLogin()">Se connecter</button>
-    <button class="cancel-button" (click)="closeModal()">Annuler</button>
   </div>
-</div> -->
+</ion-grid>
