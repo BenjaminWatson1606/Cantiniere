@@ -8,9 +8,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { MenuCardComponent } from './components/menu-card/menu-card.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MenuCardComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, LoginComponent],
   bootstrap: [AppComponent],
