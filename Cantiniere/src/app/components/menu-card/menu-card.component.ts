@@ -21,6 +21,11 @@ export class MenuCardComponent  implements OnInit {
     this.menu = this.menuService.getMenu(this.mealService.getMeals());
   }
   
+  /**
+   * Get the display name of the given category using the meal service method
+   * @param category The category to get the name of 
+   * @returns Returns the name of the category as a string or undefined (if the category doesn't exist in the array)
+   */
   getCategoryName(category: string): string|undefined {
     return this.mealService.getCategoryName(category);
   }
