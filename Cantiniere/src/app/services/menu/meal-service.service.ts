@@ -10,6 +10,7 @@ export class MealService {
    * List of the different meals (API request in the future)
    * @returns An array of Meal objects
    */
+  //TODO : combler avec des requetes api (récupérer les données de l'api et les convertir en tableau de Meal)
   getMeals(): Meal[]{
     let meals = [
       {label: "Coca", price: 1, category: "Boissons", categoryIndex: 9},
