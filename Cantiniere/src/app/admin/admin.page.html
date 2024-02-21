@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar class="header">
+    <ion-button slot="start" fill="clear">
+      <img
+        class="logo"
+        src="/assets/Pictures/logo.png"
+        alt="Logo"
+        width="50"
+        height="50"
+      />
+    </ion-button>
+    <ion-buttons slot="start">
+      <ion-button shape="round" fill="solid" color="warning" routerLink="/admin"
+        >Plat de la semaine</ion-button
+      >
+      <ion-button shape="round" fill="solid" color="warning">Carte</ion-button>
+      <ion-button
+        shape="round"
+        fill="solid"
+        color="warning"
+        routerLink="/admin-recap"
+        >Commandes</ion-button
+      >
+    </ion-buttons>
+    <ion-buttons>
+      <ion-button shape="round" fill="solid" color="warning"
+        >Utilisateurs</ion-button
+      >
+      <ion-button shape="round" fill="solid" color="warning"
+        >Configuration</ion-button
+      >
+      <ion-button shape="round" fill="solid" color="warning"
+        >Mon Compte</ion-button
+      >
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button shape="round" color="light">
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <div class="white_text" slot="end">Bonjour Admin</div>
+  </ion-toolbar>
+</ion-header>
+
+<div class="container">
+  <!-- Add dish input -->
+  <div class="input-container">
+    <div class="input-wrapper">
+      <ion-input type="text"></ion-input>
+      <ion-button
+        class="add-dish-button"
+        shape="round"
+        fill="solid"
+        color="warning"
+      >
+        Ajouter le plat
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- Panels -->
+  <div class="panels-container">
+    <div class="panel">
+      <h2>Lundi</h2>
+      <a href="#" class="sub-panel">Plat 1</a>
+      <a href="#" class="sub-panel">Plat 2</a>
+    </div>
+    <div class="panel">
+      <h2>Mardi</h2>
+      <a href="#" class="sub-panel">Plat 1</a>
+      <a href="#" class="sub-panel">Plat 2</a>
+    </div>
+    <div class="panel">
+      <h2>Mercredi</h2>
+      <a href="#" class="sub-panel">Plat 1</a>
+      <a href="#" class="sub-panel">Plat 2</a>
+    </div>
+    <div class="panel">
+      <h2>Jeudi</h2>
+      <a href="#" class="sub-panel">Plat 1</a>
+      <a href="#" class="sub-panel">Plat 2</a>
+    </div>
+    <div class="panel">
+      <h2>Vendredi</h2>
+      <a href="#" class="sub-panel">Plat 1</a>
+      <a href="#" class="sub-panel">Plat 2</a>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-/* HEADER */
+/* HEADER STYLES */
 .header {
   --background: rgb(29, 29, 29) !important;
 }
@@ -13,8 +13,55 @@
   margin-right: 10px;
 }
 
+/* INPUT STYLES */
+.sc-ion-input-md-h:not(.legacy-input) {
+  min-height: 35px;
+  border: 2px solid black;
+  border-radius: 2rem;
+  width: 100%;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper ion-input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+/* BODY STYLES */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+}
+
+/* PANELS STYLES */
 .container {
-  padding-top: 20px ;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1;
+}
+
+/* PANELS STYLES */
+.panels-container {
+  padding-top: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -60,7 +107,7 @@
   border-radius: 1rem;
   font-weight: bold;
   text-align: center;
-  line-height: 100px;
+  line-height: 100px; 
   text-decoration: none;
   display: block;
   color: black;

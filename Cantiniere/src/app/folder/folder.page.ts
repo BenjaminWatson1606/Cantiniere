@@ -38,7 +38,6 @@ export class FolderPage implements OnInit {
         this.openRegisterModal();
       }
     });
-    
 
     return await modal.present();
   }
@@ -46,7 +45,7 @@ export class FolderPage implements OnInit {
   async openRegisterModal() {
     const registerModal = await this.modalController.create({
       component: RegisterComponent,
-      cssClass: 'custom-modal-content', 
+      cssClass: 'custom-modal-content',
       backdropDismiss: true,
       mode: 'ios',
       presentingElement: await this.modalController.getTop(),
@@ -54,7 +53,7 @@ export class FolderPage implements OnInit {
 
     await registerModal.present();
   }
-  
+
   async openMenuCard() {
     const modal = await this.modalController.create({
       component: MenuCardComponent,
