@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AuthenticationService } from './authentication.service';
+
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +11,7 @@ import { map } from 'rxjs/operators';
 export class LoginService {
   private apiUrl = 'http://localhost:8080/stone.lunchtime/login';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthenticationService) {}
 
   login(email: string, password: string): Observable<any> {
     const requestBody = {
@@ -27,7 +29,9 @@ export class LoginService {
           const token = authHeader.split(' ')[1];
 
           if (token) {
+            this.authService.setAuthenticated(true);
             localStorage.setItem('token', token);
+            this.authService.updateAuthenticationStatus();
           }
         }
 

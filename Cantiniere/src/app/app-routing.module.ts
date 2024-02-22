@@ -11,11 +11,11 @@ const routes: Routes = [
   {
     path: 'admin',
     canActivate: [AuthGuard],
-    loadChildren: () => import('./admin/admin.module').then(m => m.AdminPageModule),
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminPageModule),
   },
   {
     path: 'menu',
-    loadChildren: () => import('./folder/folder.module').then(m => m.FolderPageModule),
+    loadChildren: () => import('./pages/folder/folder.module').then(m => m.FolderPageModule),
   },
   {
     path: 'admin-menu',
