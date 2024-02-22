@@ -5,7 +5,7 @@ import { AuthGuard } from './auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'menu',
+    redirectTo: 'admin-menu',
     pathMatch: 'full',
   },
   {
@@ -20,8 +20,8 @@ const routes: Routes = [
   {
     path: 'admin-menu',
     loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
-  }
-
+  },
+  
 ];
 
 @NgModule({

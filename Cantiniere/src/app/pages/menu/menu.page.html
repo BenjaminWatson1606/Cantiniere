@@ -12,8 +12,8 @@
       size="small"
       color="warning"
       [class.selected-button]="category === selectedCategory"
-      (click)="selectCategory(category)"
-      >{{ getCategoryName(category) }}
+      (click)="selectMealCategory(category)"
+      >{{ getTemplateName(category) }}
     </ion-button>
   </ion-list>
 </div>
@@ -63,7 +63,7 @@
         <ion-col>Éditer</ion-col>
         <ion-col>Supprimer</ion-col>
       </ion-row>
-      @if(isMealsEmpty()){
+      @if(categoryHasMeals()){
         <ion-row *ngFor="let meal of selectedMeals">
           @if(!meal.edited){
             <ion-col>
@@ -118,7 +118,7 @@
                 <!-- Validate button -->
                   <ion-button 
                     fill="none"
-                    (click)="submitMeal(meal)">
+                    (click)="updateMeal(meal)">
                     <ion-icon name="checkmark-outline"/>
                   </ion-button>
                 }
@@ -140,7 +140,7 @@
         <ion-row>
           <ion-col>
             <div class="empty-meal-text">
-              Aucun plat trouvé pour la catégorie {{ getCategoryName(selectedCategory) }}
+              Aucun plat trouvé pour la catégorie {{ getTemplateName(selectedCategory) }}
             </div>
           </ion-col>
         </ion-row>

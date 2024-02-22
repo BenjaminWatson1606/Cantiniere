@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+
 import { Meal } from 'src/app/interfaces/meal-model';
-import { Menu } from 'src/app/interfaces/menu-model';
-import { MenuService } from 'src/app/services/menu/menu.service';
+import { MealService } from 'src/app/services/meal/meal.service';
 
 @Component({
   selector: 'app-menu',
@@ -11,106 +11,93 @@ import { MenuService } from 'src/app/services/menu/menu.service';
 })
 export class MenuPage implements OnInit {
 
+  meals: Meal[] = [];
   categories!: string[];
-  menu!: Menu;
-
+  
   selectedCategory!: string;
-  selectedMeals: Array<Meal> | undefined;
-
-  newMeal: Meal = {label: "", price: null, category: '', categoryIndex: 0};
+  selectedMeals: Meal[] | undefined;  
+  newMeal: Meal = {} as Meal;
 
   constructor(
-      private menuService: MenuService, 
-      private alertController: AlertController
-    ) { }
-
+    private mealService: MealService,
+    private alertController: AlertController
+  ){}
+  
   ngOnInit() {
-    this.menu = this.menuService.menu;
-    this.categories = this.menuService.categories;
-    this.selectCategory(this.categories[3]);
-  }
-  
-  //#region Category Handling Methods
-  /**
-  * Get the display name of the given category using the meal service method
-  * @param category The category to get the name of 
-  * @returns Returns the name of the category as a string or undefined (if the category doesn't exist in the array)
-  */
-  getCategoryName(category: string): string|undefined {
-    return this.menuService.getCategoryName(category);
+    this.categories = this.mealService.getMealCategories();
+    this.mealService.getWeeklyMeals().subscribe((data) => {
+      this.meals = data;
+      this.selectMealCategory(this.categories[3]);
+    })
+    
   }
 
   /**
-   * Update the value of the selected category and get its meals from the menu
-   * @param category Value of the new selected category
+   * Get the template name of a category
+   * @param category The category to get the template name of
+   * @returns Returns the template name as a string. Example: MAIN_DISHES => Plats Principaux 
    */
-  selectCategory(category: string){
-    if(this.selectedCategory == category){
+  getTemplateName(category: string): string {
+    return this.mealService.getTemplateName(category);
+  }
+
+  /**
+   * Select a new category and get its meals
+   * @param category The new selected category
+   */
+  selectMealCategory(category: string){
+    if(this.selectedCategory == category)
       return;
-    }
 
-    //Set selectedCategory and get its meals from the service
     this.selectedCategory = category;
-    this.selectedMeals = this.menuService.getMealsFromCategory(category);
+    this.selectedMeals = this.mealService.getMealOfCategory(this.meals, this.selectedCategory);
   }
 
   /**
-   * Return the current state of the selectedMeals array
-   * @returns False => undefined or length <= 0 / True => else
+   * Indicates if the selected category contains any meal or not
+   * @returns Returns if the selected category has atleast one meal
    */
-  isMealsEmpty(): boolean{
-    if(!this.selectedMeals || this.selectedMeals.length <= 0)
-      return false;
-    else
-      return true
+  categoryHasMeals(): boolean{
+    return this.selectedMeals != undefined && this.selectedMeals.length > 0;
   }
-  //#endregion
   
-  //#region Meal Editing Methods (Edit, Add, Remove)
   /**
-   * Start editing a meal
-   * @param meal The meal that will be edited
+   * Start editing a given meal
+   * @param meal The meal to edit
    */
   editMeal(meal: Meal){
     meal.edited = true;
   }
 
   /**
-   * Stop meal editing and push the modifications
-   * @param meal The meal that was edited
+   * End meal editing and update meal informations to the database
+   * @param meal The updated meal object
    */
-  submitMeal(meal: Meal){
+  updateMeal(meal: Meal){
+    this.mealService.updateMeal(meal);
     meal.edited = false;
   }
 
   /**
-   * Method to remove a meal from the menu
-   * @param meal The meal that will be removed
-   */
-  removeMeal(meal: Meal){
-    this.menuService.removeMealToMenu(meal);
-    this.menu = this.menuService.menu;
-  }
-
-  /**
-   * Add a new meal in the menu
+   * Add a new meal to the database
    */
   submitMealForm(){
-    //Set new meal category and category index
     this.newMeal.category = this.selectedCategory;
-    this.newMeal.categoryIndex = this.menuService.getCategoryId(this.newMeal.category);
-
-    //Add the meal to the menu
-    this.menuService.addMealToMenu(this.newMeal);
-    this.newMeal = {label: "", price: null, category: '', categoryIndex: 0}
-    this.menu = this.menuService.menu;
+    this.mealService.addMeal(this.newMeal);
+    this.newMeal = {} as Meal;
   }
-  //#endregion
   
-  //#region Alert Methods
   /**
-   * Create an alert to confirm the suppression of any meal
-   * @param meal The meal that should be deleted if the user confirms
+   * Remove a meal from the database
+   * @param meal The meal object to remove
+   */
+  removeMeal(meal: Meal){
+    this.mealService.removeMeal(meal);
+  }
+
+  /**
+   * Create an alert asking the confirmation to delete a meal from the menu
+   * @param meal The meal object to delete
    */
   async showAlert(meal: Meal) {
     const alert = await this.alertController.create({
@@ -134,5 +121,4 @@ export class MenuPage implements OnInit {
 
     await alert.present();
   }
-  //#endregion
 }
