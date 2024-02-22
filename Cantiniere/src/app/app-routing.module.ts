@@ -5,7 +5,7 @@ import { AuthGuard } from './auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'admin-menu',
+    redirectTo: 'menu',
     pathMatch: 'full',
   },
   {
