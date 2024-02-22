@@ -1,11 +1,27 @@
+.body > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .button-list-container{
     width: 100%;
     height: auto;
+    margin-top: 1%;
 }
+
+.input-container{
+    width: 50%;
+    display: inline-flex;
+    margin: 2.5px;
+    padding: 1%;
+}
+
 
 .button-list{
     display: inline-block;
     padding: 0%;
+    margin-bottom: 0.5%;
 }
 
 .button-list > ion-button{
@@ -62,11 +78,4 @@ ion-button{
     text-align: center;
     font-weight: bold;
     color: rgb(226, 47, 47);
-}
-
-.input-container{
-    width: 50%;
-    display: inline-flex;
-    margin: 2.5px;
-    padding: 2.5px;
 }
