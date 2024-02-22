@@ -17,6 +17,11 @@ const routes: Routes = [
     path: 'menu',
     loadChildren: () => import('./folder/folder.module').then(m => m.FolderPageModule),
   },
+  {
+    path: 'admin-menu',
+    loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
+  }
+
 ];
 
 @NgModule({
