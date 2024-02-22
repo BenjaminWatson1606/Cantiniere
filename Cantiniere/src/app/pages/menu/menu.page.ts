@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { Meal } from 'src/app/interfaces/meal-model';
 import { Menu } from 'src/app/interfaces/menu-model';
 import { MenuService } from 'src/app/services/menu/menu.service';
@@ -18,7 +19,10 @@ export class MenuPage implements OnInit {
 
   newMeal: Meal = {label: "", price: null, category: '', categoryIndex: 0};
 
-  constructor(private menuService: MenuService) { }
+  constructor(
+      private menuService: MenuService, 
+      private alertController: AlertController
+    ) { }
 
   ngOnInit() {
     this.menu = this.menuService.menu;
@@ -26,11 +30,12 @@ export class MenuPage implements OnInit {
     this.selectCategory(this.categories[3]);
   }
   
-    /**
-   * Get the display name of the given category using the meal service method
-   * @param category The category to get the name of 
-   * @returns Returns the name of the category as a string or undefined (if the category doesn't exist in the array)
-   */
+  //#region Category Handling Methods
+  /**
+  * Get the display name of the given category using the meal service method
+  * @param category The category to get the name of 
+  * @returns Returns the name of the category as a string or undefined (if the category doesn't exist in the array)
+  */
   getCategoryName(category: string): string|undefined {
     return this.menuService.getCategoryName(category);
   }
@@ -59,7 +64,9 @@ export class MenuPage implements OnInit {
     else
       return true
   }
-
+  //#endregion
+  
+  //#region Meal Editing Methods (Edit, Add, Remove)
   /**
    * Start editing a meal
    * @param meal The meal that will be edited
@@ -98,4 +105,34 @@ export class MenuPage implements OnInit {
     this.newMeal = {label: "", price: null, category: '', categoryIndex: 0}
     this.menu = this.menuService.menu;
   }
+  //#endregion
+  
+  //#region Alert Methods
+  /**
+   * Create an alert to confirm the suppression of any meal
+   * @param meal The meal that should be deleted if the user confirms
+   */
+  async showAlert(meal: Meal) {
+    const alert = await this.alertController.create({
+      header: `Supprimer ${meal.label}`,
+      message: `Êtes-vous sûr de supprimer ${meal.label} ?`,
+      buttons: 
+      [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: () => {
+            this.removeMeal(meal);
+          },
+        },
+      ]
+    });
+
+    await alert.present();
+  }
+  //#endregion
 }
