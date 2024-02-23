@@ -12,8 +12,8 @@
       size="small"
       color="warning"
       [class.selected-button]="category === selectedCategory"
-      (click)="selectCategory(category)"
-      >{{ getCategoryName(category) }}
+      (click)="selectMealCategory(category)"
+      >{{ getTemplateName(category) }}
     </ion-button>
   </ion-list>
 </div>
@@ -41,7 +41,7 @@
     label="Prix (€)"
     placeholder="Entrez le prix du nouveau plat..."
     required
-    [(ngModel)]="newMeal.price" 
+    [(ngModel)]="newMeal.priceDF" 
     name="price"
     #newPrice="ngModel"/>
 
@@ -63,7 +63,7 @@
         <ion-col>Éditer</ion-col>
         <ion-col>Supprimer</ion-col>
       </ion-row>
-      @if(isMealsEmpty()){
+      @if(categoryHasMeals()){
         <ion-row *ngFor="let meal of selectedMeals">
           @if(!meal.edited){
             <ion-col>
@@ -76,7 +76,7 @@
               <p 
               class="grid-item-text"
               (click)="editMeal(meal)"
-              >{{ meal.price }}€</p>
+              >{{ meal.priceDF }}€</p>
             </ion-col>
             <ion-col>
               <ion-button 
@@ -108,7 +108,7 @@
               <ion-input
                 type="number"
                 required
-                [(ngModel)]="meal.price"
+                [(ngModel)]="meal.priceDF"
                 #price="ngModel">
               </ion-input>
               <p>(€)</p>
@@ -118,7 +118,7 @@
                 <!-- Validate button -->
                   <ion-button 
                     fill="none"
-                    (click)="submitMeal(meal)">
+                    (click)="updateMeal(meal)">
                     <ion-icon name="checkmark-outline"/>
                   </ion-button>
                 }
@@ -140,7 +140,7 @@
         <ion-row>
           <ion-col>
             <div class="empty-meal-text">
-              Aucun plat trouvé pour la catégorie {{ getCategoryName(selectedCategory) }}
+              Aucun plat trouvé pour la catégorie {{ getTemplateName(selectedCategory) }}
             </div>
           </ion-col>
         </ion-row>

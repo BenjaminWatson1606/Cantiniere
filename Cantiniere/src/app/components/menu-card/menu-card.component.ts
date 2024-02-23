@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Menu } from 'src/app/interfaces/menu-model';
-import { MenuService } from 'src/app/services/menu/menu.service';
+import { Meal } from 'src/app/interfaces/meal-model';
+import { MealService } from 'src/app/services/meal/meal.service';
 
 @Component({
   selector: 'app-menu-card',
@@ -9,20 +9,60 @@ import { MenuService } from 'src/app/services/menu/menu.service';
 })
 export class MenuCardComponent  implements OnInit {
 
-  menu!: Menu;
+  mealCategories: MealCategory[] = [];
 
-  constructor(private menuService: MenuService) {}
+  constructor(private mealService: MealService) {}
 
   ngOnInit() {
-    this.menu = this.menuService.menu;
+    this.mealService.getDailyMeals().subscribe((data) => {
+      this.getMealCategories(data);
+    })
   }
   
   /**
-   * Get the display name of the given category using the meal service method
-   * @param category The category to get the name of 
-   * @returns Returns the name of the category as a string or undefined (if the category doesn't exist in the array)
+   * Get the template name of a given meal category
+   * @param category The meal category to get the template name of
+   * @returns Return the template name of the meal category as a string
    */
-  getCategoryName(category: string): string|undefined {
-    return this.menuService.getCategoryName(category);
+  getTemplateName(category: string): string {
+    return this.mealService.getTemplateName(category);
   }
+
+  /**
+   * Create an array with the available meal categories and their respective meals
+   * @param meals Meals array to filter
+   */
+  getMealCategories(meals: Meal[]){
+    if(!meals || meals.length <= 0)
+      return;
+
+    //else
+    for(let meal of meals){
+      const categoryIndex = this.mealCategories.findIndex(c => c.label == meal.category);
+      //Category exists
+      if(categoryIndex >= 0){
+        this.mealCategories[categoryIndex].meals.push(meal);
+      }
+      //Category doesn't exist
+      else{
+        const newCategory = { label: meal.category, meals: []};
+        this.mealCategories.push(newCategory);
+        //Push the meal into the new meal category
+        const length = this.mealCategories.length - 1;
+        this.mealCategories[length].meals.push(meal);
+      }
+    }
+  }
+
+  /**
+   * Indicates if the meal categories is defined and not empty 
+   */
+  hasMealCategories(): boolean{
+    return this.mealCategories && this.mealCategories.length > 0;
+  }
+}
+
+interface MealCategory{
+  label: string,
+  meals: Meal[]
 }

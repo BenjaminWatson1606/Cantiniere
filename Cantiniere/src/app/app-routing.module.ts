@@ -20,8 +20,8 @@ const routes: Routes = [
   {
     path: 'admin-menu',
     loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
-  }
-
+  },
+  
 ];
 
 @NgModule({

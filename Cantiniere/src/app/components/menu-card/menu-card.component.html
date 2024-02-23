@@ -4,11 +4,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-grid col-2 *ngIf="menu" class="grid-container">
-  <div *ngFor="let category of menu.categories" class="grid-element">
-    <h3 class="title">{{ getCategoryName(category.label) }}</h3>
-    <div *ngFor="let meal of category.meals">
-      <p class="text">{{ meal.label }}.............{{ meal.price }}€</p>
+<ion-content>
+  <ion-grid col-2 *ngIf="hasMealCategories()" class="grid-container">
+    <div *ngFor="let category of mealCategories" class="grid-element">
+      <h3 class="title">{{ getTemplateName(category.label) }}</h3>
+      <div *ngFor="let meal of category.meals">
+        <p class="text">{{ meal.label }}.............{{ meal.priceDF }}€</p>
+      </div>
     </div>
-  </div>
-</ion-grid>
+  </ion-grid>
+</ion-content>
