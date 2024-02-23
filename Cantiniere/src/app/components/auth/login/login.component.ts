@@ -4,7 +4,7 @@ import {
   LoadingController,
   ToastController,
 } from '@ionic/angular';
-import { LoginService } from '../services/auth/login.service';
+import { LoginService } from '../../../services/auth/login.service';
 
 @Component({
   selector: 'app-login',

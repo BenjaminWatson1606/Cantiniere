@@ -1,25 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { LoginComponent } from '../login/login.component';
-import { RegisterComponent } from '../register/register.component';
+import { LoginComponent } from '../components/auth/login/login.component';
+import { RegisterComponent } from '../components/auth/register/register.component';
 import { MenuCardComponent } from '../components/menu-card/menu-card.component';
+import { AuthenticationService } from '../services/auth/authentication.service';
+import { DisconnectComponent } from '../components/auth/disconnect/disconnect.component';
 
 @Component({
-  selector: 'app-folder',
-  templateUrl: './folder.page.html',
-  styleUrls: ['./folder.page.scss'],
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss'],
 })
-export class FolderPage implements OnInit {
-  public folder!: string;
+export class NavbarComponent implements OnInit {
+  isAuthenticated: boolean = false;
 
   constructor(
     private modalController: ModalController,
-    private activatedRoute: ActivatedRoute
+    private authService: AuthenticationService
   ) {}
 
   ngOnInit() {
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
+    this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
+      this.isAuthenticated = isAuthenticated;
+    });
+
+    this.isAuthenticated = this.authService.isAuthenticated();
   }
 
   async openLoginModal() {
@@ -60,5 +65,16 @@ export class FolderPage implements OnInit {
       cssClass: 'custom-modal-background',
     });
     return await modal.present();
+  }
+
+  async openDiscModal() {
+    const modal = await this.modalController.create({
+      component: DisconnectComponent,
+    });
+    return await modal.present();
+  }
+
+  logout() {
+    this.authService.setAuthenticated(false);
   }
 }

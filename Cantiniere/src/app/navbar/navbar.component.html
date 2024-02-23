@@ -32,41 +32,55 @@
     </div>
     <ion-buttons slot="end">
       <ion-button
+        *ngIf="!isAuthenticated"
         shape="round"
         fill="solid"
         color="warning"
         (click)="openLoginModal()"
-        >Se Connecter</ion-button
       >
+        Se Connecter
+      </ion-button>
+      <ion-button
+        *ngIf="isAuthenticated"
+        shape="round"
+        (click)="openDiscModal()"
+      >
+        <svg
+          width="51"
+          height="51"
+          viewBox="0 0 51 51"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M29.1446 19.1067L35.4291 25.4756M35.4291 25.4756L29.1446 31.8446M35.4291 25.4756H6.25195"
+            stroke="white"
+            stroke-width="3.10581"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M18.7573 31.8445C18.7573 36.5345 22.4896 40.3365 27.0936 40.3365H35.43C40.034 40.3365 43.7663 36.5345 43.7663 31.8445V23.3526V19.1067C43.7663 14.4167 40.034 10.6147 35.43 10.6147L33.3459 10.6147H27.0936C22.4896 10.6147 18.7573 14.4167 18.7573 19.1067"
+            stroke="white"
+            stroke-width="3.10581"
+            stroke-linecap="round"
+          />
+          <path
+            d="M29.1446 19.1067L35.4291 25.4756M35.4291 25.4756L29.1446 31.8446M35.4291 25.4756H6.25195"
+            stroke="white"
+            stroke-width="3.10581"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M18.7573 31.8445C18.7573 36.5345 22.4896 40.3365 27.0936 40.3365H35.43C40.034 40.3365 43.7663 36.5345 43.7663 31.8445V23.3526V19.1067C43.7663 14.4167 40.034 10.6147 35.43 10.6147L33.3459 10.6147H27.0936C22.4896 10.6147 18.7573 14.4167 18.7573 19.1067"
+            stroke="white"
+            stroke-width="3.10581"
+            stroke-linecap="round"
+          />
+        </svg>
+      </ion-button>
+      <p *ngIf="isAuthenticated" style="color: white">Bonjour Personne</p>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
-<div class="container">
-  <div class="panel">
-    <h2>Lundi</h2>
-    <a href="#" class="sub-panel">Plat 1</a>
-    <a href="#" class="sub-panel">Plat 2</a>
-  </div>
-  <div class="panel">
-    <h2>Mardi</h2>
-    <a href="#" class="sub-panel">Plat 1</a>
-    <a href="#" class="sub-panel">Plat 2</a>
-  </div>
-  <div class="panel">
-    <h2>Mercredi</h2>
-    <a href="#" class="sub-panel">Plat 1</a>
-    <a href="#" class="sub-panel">Plat 2</a>
-  </div>
-
-  <div class="panel">
-    <h2>Jeudi</h2>
-    <a href="#" class="sub-panel">Plat 1</a>
-    <a href="#" class="sub-panel">Plat 2</a>
-  </div>
-  <div class="panel">
-    <h2>Vendredi</h2>
-    <a href="#" class="sub-panel">Plat 1</a>
-    <a href="#" class="sub-panel">Plat 2</a>
-  </div>
-</div>

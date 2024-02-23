@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ModalController, LoadingController, ToastController } from '@ionic/angular';
-import { RegisterService } from '../services/auth/register.service';
+import { RegisterService } from '../../../services/auth/register.service';
 
 @Component({
   selector: 'app-register',
