@@ -122,28 +122,32 @@ export class MealService {
     
     const url = `http://localhost:8080/stone.lunchtime/meal/update/${meal.id}`;
     const body = JSON.stringify(meal);
+
     return this.http.patch(url, body, {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       })
-    }).pipe(map(res => res as Meal))
+    }).pipe(map(res => res as Meal));
   }
 
   /**
    * Use a put request to add a new meal to the database
    * @param meal The meal to add to the database
    */
-  addMeal(meal: Meal){
-    const data = {
-      label: meal.label,
-      priceDF: meal.priceDF,
-      category: meal.category
-    }
-    this.http.put(`http://localhost:8080/stone.lunchtime/meal/add`, data).subscribe(
-      res => console.log(res),
-      error => console.log(error)
-    )
+  addMeal(meal: Meal): Observable<Meal> | undefined{
+    const token = localStorage.getItem('token');
+    if(!token) return undefined;
+
+    const url = 'http://localhost:8080/stone.lunchtime/meal/add';
+    const body = JSON.stringify(meal);
+
+    return this.http.put(url, body, {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      })
+    }).pipe(map(res => res as Meal));
   }
 
   /**

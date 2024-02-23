@@ -1,5 +1,6 @@
-import { Component, OnInit, createNgModule } from '@angular/core';
+import { CSP_NONCE, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { delay } from 'rxjs';
 
 import { Meal } from 'src/app/interfaces/meal-model';
 import { MealService } from 'src/app/services/meal/meal.service';
@@ -15,8 +16,10 @@ export class MenuPage implements OnInit {
   categories!: string[];
   
   selectedCategory!: string;
-  selectedMeals: Meal[] | undefined;  
+  selectedMeals: Meal[] | undefined;
+
   newMeal: Meal = {} as Meal;
+  updateMeals!: ChangeDetectorRef;
 
   constructor(
     private mealService: MealService,
@@ -29,7 +32,6 @@ export class MenuPage implements OnInit {
       this.meals = data;
       this.selectMealCategory(this.categories[3]);
     })
-    
   }
 
   /**
@@ -75,7 +77,6 @@ export class MenuPage implements OnInit {
    */
   updateMeal(meal: Meal){
     this.mealService.updateMeal(meal)?.subscribe();
-    console.table(this.meals[0].label);
     meal.edited = false;
   }
 
@@ -84,7 +85,12 @@ export class MenuPage implements OnInit {
    */
   submitMealForm(){
     this.newMeal.category = this.selectedCategory;
-    this.mealService.addMeal(this.newMeal);
+    this.mealService.addMeal(this.newMeal)?.subscribe(
+      res => {
+        this.meals.push(res);
+        this.selectedMeals?.push(res);
+      }
+    );
     this.newMeal = {} as Meal;
   }
   
