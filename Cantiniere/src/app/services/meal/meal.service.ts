@@ -105,9 +105,8 @@ export class MealService {
     //else
     const output: Meal[] = [];
     for(let meal of meals){
-      if(meal.category == category){
+      if(meal.category == category)
         output.push(meal);
-      }
     }
     return output
   }
@@ -117,18 +116,15 @@ export class MealService {
    * @param meal The meal from the database to update
    */
   updateMeal(meal: Meal): Observable<Meal> | undefined{
-    const token = localStorage.getItem('token');
+    const token = this.getUserToken();
     if(!token) return undefined;
     
     const url = `http://localhost:8080/stone.lunchtime/meal/update/${meal.id}`;
     const body = JSON.stringify(meal);
+    const headers = this.getHttpHeader(token);
 
-    return this.http.patch(url, body, {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      })
-    }).pipe(map(res => res as Meal));
+    return this.http.patch(url, body, { headers: headers })
+      .pipe(map(res => res as Meal));
   }
 
   /**
@@ -136,18 +132,15 @@ export class MealService {
    * @param meal The meal to add to the database
    */
   addMeal(meal: Meal): Observable<Meal> | undefined{
-    const token = localStorage.getItem('token');
+    const token = this.getUserToken();
     if(!token) return undefined;
 
     const url = 'http://localhost:8080/stone.lunchtime/meal/add';
     const body = JSON.stringify(meal);
+    const headers = this.getHttpHeader(token);
 
-    return this.http.put(url, body, {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      })
-    }).pipe(map(res => res as Meal));
+    return this.http.put(url, body, { headers: headers })
+      .pipe(map(res => res as Meal));
   }
 
   /**
@@ -155,14 +148,38 @@ export class MealService {
    * @param meal Meal object to delete from the database
    */
   removeMeal(meal: Meal): Observable<any> | undefined{
-    const token = localStorage.getItem('token');
+    const token = this.getUserToken();
     if(!token) return undefined;
 
     const url = `http://localhost:8080/stone.lunchtime/meal/delete/${meal.id}`;
-    return this.http.delete(url, {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${token}`,
-      })
-    });
+    const headers = this.getHttpHeader(token);
+
+    return this.http.delete(url, {headers: headers});
+  }
+
+  /**
+   * Create a new http request header with Authorization and Content-Type set
+   * @param token User token value
+   * @returns Returns an HttpHeaders object set with the user token and content type as json
+   */
+  getHttpHeader(token: string): HttpHeaders{
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    })
+  }
+
+  /**
+   * Checking if there's an existing token in the local storage
+   * @returns Return the token value or null if it doesn't exist
+   */
+  getUserToken(): string | null{
+    const tokenValue = localStorage.getItem('token');
+    if(tokenValue)
+      return tokenValue;
+    else{
+      console.error('No token found.');
+      return null;
+    }
   }
 }
