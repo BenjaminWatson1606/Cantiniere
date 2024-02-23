@@ -154,10 +154,15 @@ export class MealService {
    * Use a delete request to delete a given meal from the database
    * @param meal Meal object to delete from the database
    */
-  removeMeal(meal: Meal){
-    this.http.delete(`http://localhost:8080/stone.lunchtime/meal/find/${meal.id}`).subscribe(
-      res => console.log(res),
-      error => console.log(error)
-    )
+  removeMeal(meal: Meal): Observable<any> | undefined{
+    const token = localStorage.getItem('token');
+    if(!token) return undefined;
+
+    const url = `http://localhost:8080/stone.lunchtime/meal/delete/${meal.id}`;
+    return this.http.delete(url, {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+      })
+    });
   }
 }

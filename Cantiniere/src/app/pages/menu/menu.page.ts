@@ -76,8 +76,8 @@ export class MenuPage implements OnInit {
    * @param meal The updated meal object
    */
   updateMeal(meal: Meal){
-    this.mealService.updateMeal(meal)?.subscribe();
     meal.edited = false;
+    this.mealService.updateMeal(meal)?.subscribe();
   }
 
   /**
@@ -99,7 +99,16 @@ export class MenuPage implements OnInit {
    * @param meal The meal object to remove
    */
   removeMeal(meal: Meal){
-    this.mealService.removeMeal(meal);
+    this.mealService.removeMeal(meal)?.subscribe(
+      res => {this.mealService.getWeeklyMeals().subscribe(res => {
+          this.meals = res;
+          this.selectedMeals = this.mealService.getMealOfCategory(this.meals, this.selectedCategory);
+        });
+      },
+      error => { 
+        console.error(error) 
+      }
+    );
   }
 
   /**
