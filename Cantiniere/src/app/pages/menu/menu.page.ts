@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, createNgModule } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 
 import { Meal } from 'src/app/interfaces/meal-model';
@@ -74,7 +74,8 @@ export class MenuPage implements OnInit {
    * @param meal The updated meal object
    */
   updateMeal(meal: Meal){
-    this.mealService.updateMeal(meal);
+    this.mealService.updateMeal(meal)?.subscribe();
+    console.table(this.meals[0].label);
     meal.edited = false;
   }
 

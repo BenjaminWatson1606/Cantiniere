@@ -9,7 +9,7 @@
     <div *ngFor="let category of mealCategories" class="grid-element">
       <h3 class="title">{{ getTemplateName(category.label) }}</h3>
       <div *ngFor="let meal of category.meals">
-        <p class="text">{{ meal.label }}.............{{ meal.price }}€</p>
+        <p class="text">{{ meal.label }}.............{{ meal.priceDF }}€</p>
       </div>
     </div>
   </ion-grid>

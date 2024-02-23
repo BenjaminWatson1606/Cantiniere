@@ -41,7 +41,7 @@
     label="Prix (€)"
     placeholder="Entrez le prix du nouveau plat..."
     required
-    [(ngModel)]="newMeal.price" 
+    [(ngModel)]="newMeal.priceDF" 
     name="price"
     #newPrice="ngModel"/>
 
@@ -76,7 +76,7 @@
               <p 
               class="grid-item-text"
               (click)="editMeal(meal)"
-              >{{ meal.price }}€</p>
+              >{{ meal.priceDF }}€</p>
             </ion-col>
             <ion-col>
               <ion-button 
@@ -108,7 +108,7 @@
               <ion-input
                 type="number"
                 required
-                [(ngModel)]="meal.price"
+                [(ngModel)]="meal.priceDF"
                 #price="ngModel">
               </ion-input>
               <p>(€)</p>
