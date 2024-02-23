@@ -4,9 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AdminConfigPageRoutingModule } from './admin-config-routing.module';
-
-import { AdminConfigPage } from './admin-config.page';
+import { AdminConfigPageRoutingModule } from './configuration-routing.module';
+import { AdminConfigPage } from './configuration.page';
 
 @NgModule({
   imports: [

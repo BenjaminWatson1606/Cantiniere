@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Configuration</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="configForm" (ngSubmit)="onSubmit()">
+      <div class="container">
+          <ion-toolbar color="dark">
+            <ion-title>Configuration</ion-title>
+          </ion-toolbar>
+        <div>
+          <label>Nombre limite de plats : </label>
+          <ion-input 
+          class="quantity-input"
+          fill="outline"
+          type="number"
+          min="0"
+          formControlName="quantity"/>
+        </div>
+        <div *ngIf="!configForm.controls.quantity.valid">
+          <p class="input-error">Veuillez indiquer la quantité de plats disponible dans le champ ci-dessus.</p>
+        </div>
+        <div>
+          <label>Heure limite pour passer commande : </label>
+          <ion-input
+          class="time-input"
+          fill="outline"
+          type="number"
+          min="0" max="23"
+          formControlName="hours"/>
+          <p>H</p>
+          <ion-input 
+          class="time-input"
+          fill="outline"
+          type="number"
+          min="0" max="59"
+          formControlName="minutes"/>
+        </div>
+        <div *ngIf="!configForm.controls.hours.valid || !configForm.controls.minutes.valid">
+          <p class="input-error">Veuillez entrer une heure limite correcte dans les champs ce-dessus.</p>
+        </div>
+        <div>
+          <ion-button
+          [disabled]="!configForm.valid"
+          type="submit"
+          color="warning"
+          >Confirmer</ion-button>
+        </div>
+      </div>
+  </form>
+</ion-content>

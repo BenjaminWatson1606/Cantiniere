@@ -6,8 +6,8 @@ import { ConfigurationService } from 'src/app/services/admin-configuration/confi
 
 @Component({
   selector: 'app-admin-config',
-  templateUrl: './admin-config.page.html',
-  styleUrls: ['./admin-config.page.scss'],
+  templateUrl: './configuration.page.html',
+  styleUrls: ['./configuration.page.scss'],
 })
 export class AdminConfigPage implements OnInit {
 
