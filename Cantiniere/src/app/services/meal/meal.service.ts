@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
@@ -78,15 +78,7 @@ export class MealService {
    */
   getWeeklyMeals(): Observable<Meal[]>{
     const url = "http://localhost:8080/stone.lunchtime/meal/findallavailableforthisweek";
-    return this.http.get<any[]>(url)
-    .pipe(map(response => response.map(res => ({
-          label: res.label,
-          price: res.priceDF,
-          category: res.category,
-          id: res.id
-        }) as Meal
-      ))
-    );
+    return this.http.get<any[]>(url).pipe(map(response => response.map(res => (res as Meal))));
   }
 
     /**
@@ -95,15 +87,7 @@ export class MealService {
    */
     getDailyMeals(): Observable<Meal[]>{
       const url = "http://localhost:8080/stone.lunchtime/meal/findallavailablefortoday";
-      return this.http.get<any[]>(url)
-      .pipe(map(response => response.map(res => ({
-            label: res.label,
-            price: res.priceDF,
-            category: res.category,
-            id: res.id
-          }) as Meal
-        ))
-      );
+      return this.http.get<any[]>(url).pipe(map(response => response.map(res => res as Meal)));
     }
 
   /**
@@ -132,12 +116,18 @@ export class MealService {
    * Use a patch request to update meal's informations in the database
    * @param meal The meal from the database to update
    */
-  updateMeal(meal: Meal){
-    const data = { label: meal.label, priceDF: meal.price };
-    this.http.patch(`http://localhost:8080/stone.lunchtime/order/update/${meal.id}`, data).subscribe(
-      res => console.log(res),
-      error => console.log(error)
-    )
+  updateMeal(meal: Meal): Observable<Meal> | undefined{
+    const token = localStorage.getItem('token');
+    if(!token) return undefined;
+    
+    const url = `http://localhost:8080/stone.lunchtime/meal/update/${meal.id}`;
+    const body = JSON.stringify(meal);
+    return this.http.patch(url, body, {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      })
+    }).pipe(map(res => res as Meal))
   }
 
   /**
@@ -147,7 +137,7 @@ export class MealService {
   addMeal(meal: Meal){
     const data = {
       label: meal.label,
-      priceDF: meal.price,
+      priceDF: meal.priceDF,
       category: meal.category
     }
     this.http.put(`http://localhost:8080/stone.lunchtime/meal/add`, data).subscribe(
