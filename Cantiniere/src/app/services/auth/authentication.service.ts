@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import * as jwt_decode from 'jwt-decode';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -64,4 +65,30 @@ export class AuthenticationService {
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');
   }
+
+    /**
+   * Create a new http request header with Authorization and Content-Type set
+   * @param token User token value
+   * @returns Returns an HttpHeaders object set with the user token and content type as json
+   */
+    getHttpHeader(token: string): HttpHeaders{
+      return new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      })
+    }
+  
+    /**
+     * Checking if there's an existing token in the local storage
+     * @returns Return the token value or null if it doesn't exist
+     */
+    getUserToken(): string | null{
+      const tokenValue = localStorage.getItem('token');
+      if(tokenValue)
+        return tokenValue;
+      else{
+        console.error('No token found.');
+        return null;
+      }
+    }
 }
