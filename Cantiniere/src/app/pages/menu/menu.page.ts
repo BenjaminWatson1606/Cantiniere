@@ -1,5 +1,5 @@
 import { CSP_NONCE, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { delay } from 'rxjs';
 
 import { Meal } from 'src/app/interfaces/meal-model';
@@ -23,7 +23,8 @@ export class MenuPage implements OnInit {
 
   constructor(
     private mealService: MealService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private toastController: ToastController
   ){}
   
   ngOnInit() {
@@ -77,7 +78,13 @@ export class MenuPage implements OnInit {
    */
   updateMeal(meal: Meal){
     meal.edited = false;
-    this.mealService.updateMeal(meal)?.subscribe();
+    this.mealService.updateMeal(meal)?.subscribe(
+        res => this.createToast(res, 'update'),
+        error => {
+          this.reloadMeals();
+          this.createErrorToast('update');
+        },
+      );
   }
 
   /**
@@ -87,9 +94,10 @@ export class MenuPage implements OnInit {
     this.newMeal.category = this.selectedCategory;
     this.mealService.addMeal(this.newMeal)?.subscribe(
       res => {
-        this.meals.push(res);
-        this.selectedMeals?.push(res);
-      }
+        this.reloadMeals();
+        this.createToast(res, 'add');
+      },
+      error => this.createErrorToast('add'),
     );
     this.newMeal = {} as Meal;
   }
@@ -100,13 +108,25 @@ export class MenuPage implements OnInit {
    */
   removeMeal(meal: Meal){
     this.mealService.removeMeal(meal)?.subscribe(
-      res => {this.mealService.getWeeklyMeals().subscribe(res => {
-          this.meals = res;
-          this.selectedMeals = this.mealService.getMealOfCategory(this.meals, this.selectedCategory);
-        });
+      res => {
+        this.reloadMeals();
+        this.createToast(res, 'remove')
       },
-      error => { 
-        console.error(error) 
+      error => {
+        this.reloadMeals();
+        this.createErrorToast('remove');
+      },
+    );
+  }
+
+  /**
+   * Subscribe to the meal service getMeals observable and refresh meal array
+   */
+  reloadMeals(){
+    this.mealService.getWeeklyMeals().subscribe(
+      res => {
+        this.meals = res;
+        this.selectedMeals = this.mealService.getMealOfCategory(this.meals, this.selectedCategory);
       }
     );
   }
@@ -137,4 +157,40 @@ export class MenuPage implements OnInit {
 
     await alert.present();
   }
+
+  /**
+   * Create a toast to confirm meal actions to the user 
+   * @param meal The meal that has been operated
+   * @param actionType The type of action that was done
+   */
+  async createToast(meal: Meal, actionType: 'update' |'add' | 'remove') {    
+    const action = actionType == 'update' ? 'modifié' : actionType == 'add' ? 'ajouté' : 'supprimé';
+    const message = `Le plat ${meal.label} a bien été ${action} !`;
+
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2500,
+      color: 'success',
+    });
+
+    await toast.present();
+  }
+
+    /**
+   * Create a toast when an error happen during a meal backend operation 
+   * @param meal The meal that has been operated
+   * @param actionType The type of action that was done
+   */
+    async createErrorToast(actionType: 'update' |'add' | 'remove') {
+      const action = actionType == 'update' ? 'la modification' : actionType == 'add' ? "l'ajout" : 'suppression';
+      const message = `Une erreur est survenue lors de ${action} d'un plat.`;
+      
+      const toast = await this.toastController.create({
+        message: message,
+        duration: 2500,
+        color: 'danger',
+      });
+  
+      await toast.present();
+    }
 }
