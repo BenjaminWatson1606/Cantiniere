@@ -21,7 +21,10 @@ const routes: Routes = [
     path: 'admin-menu',
     loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
   },
-  
+  {
+    path: 'admin-configuration',
+    loadChildren: () => import('./pages/configuration/configuration.module').then( m => m.AdminConfigPageModule)
+  }  
 ];
 
 @NgModule({
