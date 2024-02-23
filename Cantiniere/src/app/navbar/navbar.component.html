@@ -26,6 +26,34 @@
         (click)="openMenuCard()"
         >Carte</ion-button
       >
+
+      <ion-button
+        *ngIf="(getUserRole() | async) === 'ROLE_LUNCHLADY'"
+        class="button-nav"
+        shape="round"
+        fill="solid"
+        color="warning"
+        >Récap des commandes</ion-button
+      >
+
+      <ion-button
+        *ngIf="(getUserRole() | async) === 'ROLE_LUNCHLADY'"
+        class="button-nav"
+        shape="round"
+        fill="solid"
+        color="warning"
+        >Compte utilisateur</ion-button
+      >
+
+      <ion-button
+        *ngIf="(getUserRole() | async) === 'ROLE_LUNCHLADY'"
+        class="button-nav"
+        shape="round"
+        fill="solid"
+        color="warning"
+      >
+        Configuration
+      </ion-button>
     </ion-buttons>
     <div class="white_text" slot="end">
       ⏱︎ Commandes acceptées jusqu'à 10h30
@@ -80,7 +108,9 @@
           />
         </svg>
       </ion-button>
-      <p *ngIf="isAuthenticated" style="color: white">Bonjour Personne</p>
+      <p *ngIf="isAuthenticated" style="color: white">
+        Bonjour {{ getFirstName() | async }}
+      </p>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

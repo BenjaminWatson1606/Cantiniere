@@ -5,6 +5,7 @@ import { RegisterComponent } from '../components/auth/register/register.componen
 import { MenuCardComponent } from '../components/menu-card/menu-card.component';
 import { AuthenticationService } from '../services/auth/authentication.service';
 import { DisconnectComponent } from '../components/auth/disconnect/disconnect.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -76,5 +77,13 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.authService.setAuthenticated(false);
+  }
+
+  getFirstName(): Observable<string | null> {
+    return this.authService.getFirstName();
+  }
+
+  getUserRole(): Observable<string | null> {
+    return this.authService.getUserRole();
   }
 }

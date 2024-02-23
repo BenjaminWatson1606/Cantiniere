@@ -10,12 +10,14 @@ export class AuthenticationService {
   private userRoleSubject = new BehaviorSubject<string | null>(null);
   private firstNameSubject = new BehaviorSubject<string | null>(null);
   private lastNameSubject = new BehaviorSubject<string | null>(null);
+  private userIdSubject = new BehaviorSubject<number | null>(null);
 
   isAuthenticated$: Observable<boolean> =
     this.isAuthenticatedSubject.asObservable();
   userRole$: Observable<string | null> = this.userRoleSubject.asObservable();
   firstName$: Observable<string | null> = this.firstNameSubject.asObservable();
   lastName$: Observable<string | null> = this.lastNameSubject.asObservable();
+  userId$: Observable<number | null> = this.userIdSubject.asObservable();
 
   constructor() {
     this.updateAuthenticationStatus();
@@ -34,6 +36,9 @@ export class AuthenticationService {
         const userRole: string | null = decodedToken.roles
           ? decodedToken.roles[0]
           : null;
+        const userId: number | null = decodedToken.user
+          ? decodedToken.user.id
+          : null;
         const firstName: string | null = decodedToken.user
           ? decodedToken.user.firstname
           : null;
@@ -41,10 +46,12 @@ export class AuthenticationService {
           ? decodedToken.user.name
           : null;
 
+        console.log('User ID:', userId);
         console.log('User Role:', userRole);
         console.log('First Name:', firstName);
         console.log('Last Name:', lastName);
 
+        this.userIdSubject.next(userId);
         this.userRoleSubject.next(userRole);
         this.firstNameSubject.next(firstName);
         this.lastNameSubject.next(lastName);
@@ -56,6 +63,7 @@ export class AuthenticationService {
     this.isAuthenticatedSubject.next(value);
     if (!value) {
       this.userRoleSubject.next(null);
+      this.userIdSubject.next(null);
       this.firstNameSubject.next(null);
       this.lastNameSubject.next(null);
     }
@@ -64,4 +72,13 @@ export class AuthenticationService {
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');
   }
+
+  getFirstName(): Observable<string | null> {
+    return this.firstName$;
+  }
+
+  getUserRole(): Observable<string | null> {
+    return this.userRole$;
+  }
+
 }

@@ -1,0 +1,49 @@
+.header-title {
+    text-align: right;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 10px;
+    background: rgb(29, 29, 29);
+    color: #ffffff;
+}
+
+// table
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    justify-content: space-between;
+}
+
+td {
+    padding: 10px;
+}
+
+.cells {
+    text-align: center;
+}
+
+.quantity-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-wrapper ion-item {
+    margin: 0;
+}
+
+.quantity-wrapper+td {
+    vertical-align: top;
+    /* Align the button with the top of the cell */
+}
+
+.cancelButton {
+    align-items: center;
+    justify-content: center;
+}

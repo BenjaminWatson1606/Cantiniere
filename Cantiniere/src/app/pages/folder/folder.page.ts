@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { LoginComponent } from '../../components/auth/login/login.component';
-import { RegisterComponent } from '../../components/auth/register/register.component';
-import { MenuCardComponent } from '../../components/menu-card/menu-card.component';
+import { PopUpOrderComponent } from 'src/app/components/pop-up-order/pop-up-order.component';
+
 
 @Component({
   selector: 'app-folder',
@@ -14,14 +13,21 @@ export class FolderPage implements OnInit {
   public folder!: string;
 
   constructor(
-    
+    private modalController: ModalController,
     private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
   }
-
+  
+  async openOrderModal() {
+    const modal = await this.modalController.create({
+      component: PopUpOrderComponent,
+      cssClass: 'custom-modal-background',
+    });
+    return await modal.present();
+  }
  
 
   
