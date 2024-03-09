@@ -21,8 +21,8 @@
       color="warning"
       (click)="loadMainPage()"
       >Plat de la semaine</ion-button
-      
       >
+
       <ion-button
         class="button-nav"
         shape="round"
@@ -31,6 +31,15 @@
         (click)="loadMenuPage()"
         >Carte</ion-button
       >
+
+      <ion-button *ngIf="isAuthenticated && (getUserRole() | async) !== 'ROLE_LUNCHLADY'"
+      class="button-nav"
+      shape="round"
+      fill="solid"
+      color="warning"
+      (click)="loadPage('user-account')"
+      >Mon compte</ion-button
+    >
 
       <ion-button
         *ngIf="(getUserRole() | async) === 'ROLE_LUNCHLADY'"

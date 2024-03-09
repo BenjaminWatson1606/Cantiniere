@@ -111,7 +111,7 @@ export class NavbarComponent implements OnInit {
    * Load 'menu' page for default users and load 'admin' page for admins
    */
   loadMainPage(){
-    let url = !this.isAuthenticated || this.UserHasRole('ROLE_LUNCHLADY') ? 'menu' : 'admin';
+    let url = !this.isAuthenticated || !this.UserHasRole('ROLE_LUNCHLADY') ? 'menu' : 'admin';
     this.router.navigateByUrl(url);
   }
 
@@ -120,7 +120,7 @@ export class NavbarComponent implements OnInit {
    * Open menu pop up for default users and load 'admin-menu' page for admins
    */
   loadMenuPage(){
-    if(!this.isAuthenticated || this.UserHasRole('ROLE_LUNCHLADY')){
+    if(!this.isAuthenticated || !this.UserHasRole('ROLE_LUNCHLADY')){
       this.openMenuCard();
     }
     else{
