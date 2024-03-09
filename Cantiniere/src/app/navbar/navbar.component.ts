@@ -107,11 +107,19 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl(`/${url}`);
   }
 
+  /**
+   * Load main page based on the user role
+   * Load 'menu' page for default users and load 'admin' page for admins
+   */
   loadMainPage(){
     let url = !this.isAuthenticated || this.localUserRole() !== 'ROLE_LUNCHLADY' ? 'menu' : 'admin';
     this.router.navigateByUrl(url);
   }
 
+  /**
+   * Load card menu page based on the user role
+   * Open menu pop up for default users and load 'admin-menu' page for admins
+   */
   loadMenuPage(){
     if(!this.isAuthenticated || this.localUserRole() !== 'ROLE_LUNCHLADY'){
       this.openMenuCard();
