@@ -1,0 +1,36 @@
+<!-- ORDER DISCONNECTED USER POP UP -->
+<div class="header-title">Jour</div>
+<ion-content>
+  <!-- If the user is not connected this message appears -->
+  <p class="center-text">⚠️ Merci de vous connecter pour valider votre commande</p>
+  <!-- Else if the user is connected his "cagnotte" appears-->
+  <p class="cagnotte">Cagnotte : €</p>
+  <div class="center-content">
+    <!-- ORDER DISCONNECTED USER TABLE -->
+    <!-- TODO FAIRE LE LIEN AVEC LE BACK ET LE BINDING -->
+    <table>
+      <!-- Day 1 -->
+      <tr>
+        <td class="dayText">Day 1</td>
+      </tr>
+      <tr>
+        <td>Plat 1</td>
+        <td>Qty : </td>
+        <td>Sous-total : €</td>
+        <td>
+          <ion-button shape="round" fill="solid" color="warning">
+            <ion-icon name="trash-bin-outline"></ion-icon>
+          </ion-button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</ion-content>
+<div>
+  <ion-button shape="round" fill="solid" color="dark" [disabled]="true">Total : €</ion-button>
+</div>
+<div class="popUpCartButton">
+  <ion-button shape="round" fill="solid" color="light" (click)="closeCartModal()">Annuler</ion-button>
+  <!-- If the user is connected, then they may validate their order -->
+  <ion-button shape="round" fill="solid" color="warning" (click)="validateOrder()">Valider</ion-button>
+</div>
