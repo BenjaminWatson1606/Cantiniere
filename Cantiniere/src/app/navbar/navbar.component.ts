@@ -89,13 +89,12 @@ export class NavbarComponent implements OnInit {
     return this.authService.getUserRole();
   }
 
-  localUserRole(): string | null{
-    let role = null;
-    this.authService.getUserRole().subscribe(
-      res => role = res,
-      error => console.error(error),
-    );
-    return role;
+  /**
+   * Indicated if the user has the given role
+   * @returns Returns true if the has the given role, else returns false
+   */
+  UserHasRole(role: string): boolean{
+    return this.authService.getLocalUserRole() == role;
   }
 
   //#region App Routing
@@ -112,7 +111,7 @@ export class NavbarComponent implements OnInit {
    * Load 'menu' page for default users and load 'admin' page for admins
    */
   loadMainPage(){
-    let url = !this.isAuthenticated || this.localUserRole() !== 'ROLE_LUNCHLADY' ? 'menu' : 'admin';
+    let url = !this.isAuthenticated || this.UserHasRole('ROLE_LUNCHLADY') ? 'menu' : 'admin';
     this.router.navigateByUrl(url);
   }
 
@@ -121,7 +120,7 @@ export class NavbarComponent implements OnInit {
    * Open menu pop up for default users and load 'admin-menu' page for admins
    */
   loadMenuPage(){
-    if(!this.isAuthenticated || this.localUserRole() !== 'ROLE_LUNCHLADY'){
+    if(!this.isAuthenticated || this.UserHasRole('ROLE_LUNCHLADY')){
       this.openMenuCard();
     }
     else{

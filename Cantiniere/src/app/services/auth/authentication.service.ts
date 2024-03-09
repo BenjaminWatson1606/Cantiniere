@@ -107,4 +107,13 @@ export class AuthenticationService {
   getUserRole(): Observable<string | null> {
     return this.userRole$;
   }
+
+  getLocalUserRole(): string | null{
+    let role = null;
+    this.getUserRole().subscribe(
+      res => role = res,
+      error => console.error(error),
+    );
+    return role;
+  }
 }
