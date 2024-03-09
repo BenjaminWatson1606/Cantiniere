@@ -1,0 +1,92 @@
+<!--HEADER-->
+<ion-header>
+    <ion-toolbar class="header">
+        <!--logo-->
+        <ion-button slot="start" fill="clear">
+            <img class="logo" src="/assets/Pictures/logo.png" alt="Logo" width="50" height="50">
+        </ion-button>
+        <!--Carte, Plats de la semaine, Commandes buttons-->
+        <ion-buttons slot="start">
+            <ion-button shape="round" fill="solid" color="warning" routerLink="/admin">Plat de la semaine</ion-button>
+            <ion-button shape="round" fill="solid" color="warning" routerLink="/admin-board">Carte</ion-button>
+            <ion-button shape="round" fill="solid" color="warning" routerLink="/admin-recap">Commandes</ion-button>
+        </ion-buttons>
+        <!--Utilisateur, Configuration, Mon compte buttons-->
+        <ion-buttons>
+            <ion-button shape="round" fill="solid" color="warning" routerLink="/admin-users">Utilisateurs</ion-button>
+            <ion-button shape="round" fill="solid" color="warning"
+                routerLink="/admin-configuration">Configuration</ion-button>
+            <ion-button shape="round" fill="solid" color="warning" routerLink="/admin-account">Mon Compte</ion-button>
+        </ion-buttons>
+        <!-- Log out button -->
+        <ion-buttons slot="end">
+            <ion-button shape="round" color="light">
+                <ion-icon name="arrow-forward-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <!-- Welcome user -->
+        <div class="white_text" slot="end">Bonjour Admin</div>
+    </ion-toolbar>
+</ion-header>
+
+<!--RECAP TAB-->
+<ion-content class="ion-padding">
+    <div class="center-content">
+        <ion-buttons class="tabButtons">
+            <ion-button fill="solid" color="warning">Lundi</ion-button>
+            <ion-button fill="solid" color="dark">Mardi</ion-button>
+            <ion-button fill="solid" color="warning">Mercredi</ion-button>
+            <ion-button fill="solid" color="dark">Jeudi</ion-button>
+            <ion-button fill="solid" color="warning">Vendredi</ion-button>
+        </ion-buttons>
+
+        <!-- ORDERS RECAP TABLE-->
+        <!-- TODO FAIRE LE LIEN AVEC LE BACK-->
+        <table class="cells">
+            <!--ligne 1 : Table title -->
+            <tr class="tableColor">
+                <td colspan="4" class="tableTitle">Récapitulatif</td>
+            </tr>
+            <!--ligne 2 : Client, Commande, Emportée, Annuler -->
+            <tr class="tableFirstRow">
+                <td class="filter-cell" data-column="client">Client <span class="arrow"></span></td>
+                <td class="filter-cell" data-column="commande">Commande <span class="arrow"></span></td>
+                <!-- TODO FAIRE LA FONCTION SI EMPORTE OU NON-->
+                <td class="filter-cell" data-column="emportée">Emportée <span class="arrow"></span>
+                </td>
+                <!-- TODO FAIRE LA FONCTION ANNULER UNE COMMANDE-->
+                <td class="filter-cell" data-column="annuler">Annuler <span class="arrow"></span></td>
+
+            </tr>
+            <!--ligne 3 -->
+            <tr>
+                <td>Client 1</td>
+                <td>Commande 1</td>
+                <td><ion-checkbox></ion-checkbox></td> <!-- Add checkbox here -->
+                <td>
+                    <ion-button shape="round" color="light" fill="solid">
+                        <ion-icon name="close-outline"></ion-icon>
+                    </ion-button>
+                </td>
+            </tr>
+            <!--ligne 4 -->
+            <tr>
+                <td>Client 2</td>
+                <td>Commande 2</td>
+                <td><ion-checkbox></ion-checkbox></td> <!-- Add checkbox here -->
+                <td>
+                    <ion-button shape="round" color="light" fill="solid">
+                        <ion-icon name="close-outline"></ion-icon>
+                    </ion-button>
+                </td>
+            </tr>
+        </table>
+        <!--Quantity -->
+        <!--TODO FAIRE LE LIEN AVEC LE BACK -->
+        <div class="quantity">
+            <span class="left">Quantités du jour :</span>
+            <span class="center">Plat 1 :</span>
+            <span class="right">Plat 2 :</span>
+        </div>
+    </div>
+</ion-content>
