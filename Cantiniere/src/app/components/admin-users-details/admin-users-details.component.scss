@@ -1,0 +1,52 @@
+.header-title {
+    text-align: right;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 10px;
+    background: rgb(29, 29, 29);
+    color: #ffffff;
+}
+
+// div content
+.right-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+//cagnotte
+.cagnotte {
+    display: inline-block;
+    text-align: right;
+    font-weight: bold;
+    border: 1px solid black;
+    padding: 5px 10px;
+}
+
+//order recap
+.recap-square {
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    max-width: 80%;
+    margin: auto;
+}
+
+.recap-square h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.recap-content {
+    text-align: left;
+}
+
+.cancelButton {
+    align-items: center;
+    justify-content: center;
+}

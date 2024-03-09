@@ -1,0 +1,38 @@
+<!-- ORDER DISCONNECTED USER POP UP -->
+<div class="header-title">Rechercher un utilisateur</div>
+<ion-content>
+  <div class="right-content">
+    <p class="cagnotte">Cagnotte : €</p>
+    <ion-button shape="round" fill="solid" color="warning" (click)="toggleInputField()">Créditer</ion-button>
+    <!-- Input field to appear when the button is clicked -->
+    <ion-item *ngIf="showInputField">
+      <ion-label position="floating">Entrer le montant du crédit</ion-label>
+      <ion-input type="number"></ion-input>
+      <ion-button shape="round" fill="solid" color="warning" (click)="presentCreditDialog()">Confirmer</ion-button>
+    </ion-item>
+    <ion-button shape="round" fill="solid" color="warning" (click)="toggleInputField()">Solder le
+      compte</ion-button>
+    <!-- Input field to appear when the button is clicked -->
+    <ion-item *ngIf="showInputField">
+      <ion-label position="floating">Entrer le montant du solde</ion-label>
+      <ion-input type="number"></ion-input>
+      <ion-button shape="round" fill="solid" color="warning" (click)="presentPayDialog()">Confirmer</ion-button>
+    </ion-item>
+  </div>
+  <div>
+    <!-- TODO FAIRE LE LIEN AVEC LE BACK-->
+    <p>Prénom : </p>
+    <p>Nom : </p>
+    <p>Adresse email : </p>
+  </div>
+  <!-- Order recap -->
+  <div class="recap-square">
+    <h3>Commande en cours</h3>
+    <div class="recap-content">
+      <p>Commande</p>
+    </div>
+  </div>
+</ion-content>
+<div class="cancelButton">
+  <ion-button shape="round" fill="solid" color="light" (click)="closeUsersDetailsModal()">Fermer</ion-button>
+</div>
