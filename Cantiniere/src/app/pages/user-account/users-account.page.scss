@@ -1,0 +1,110 @@
+// HEADER
+// header color
+.header {
+    --background: rgb(29, 29, 29) !important;
+}
+
+// header logo
+.logo {
+    margin-left: 10px;
+}
+
+// header text
+.white_text {
+    color: white;
+    font-size: 14px !important;
+    margin-right: 10px;
+}
+
+.header-title {
+    text-align: right;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 10px;
+    background: rgb(29, 29, 29);
+    color: #ffffff;
+}
+
+//account box
+.center-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.content-box {
+    width: 50%;
+    height: 50%;
+    border: 2px solid rgb(126, 126, 126);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: auto;
+}
+
+//div
+.divAccount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 50%
+}
+
+// div content
+.right-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+//cagnotte
+.cagnotte {
+    display: inline-block;
+    text-align: right;
+    font-weight: bold;
+    border: 1px solid black;
+    padding: 5px 10px;
+}
+
+// account text
+.accountText {
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+//order recap
+.recap-square {
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+    border-radius: 1rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    max-width: 50%;
+    margin: auto;
+}
+
+.recap-square h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.recap-content {
+    text-align: left;
+}
+
+.cancelButton {
+    align-items: center;
+    justify-content: center;
+}
+
+//buttons
+.accountButtons {
+    justify-content: space-between;
+    display: flex;
+}
