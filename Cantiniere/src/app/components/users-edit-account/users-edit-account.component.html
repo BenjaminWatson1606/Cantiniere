@@ -1,0 +1,33 @@
+<div class="header-title">Modifier mes informations</div>
+<ion-content>
+  <div class="accountText">
+    <div class="input-row">
+      <p>Prénom :</p>
+      <ion-input></ion-input>
+    </div>
+    <div class="input-row">
+      <p>Nom :</p>
+      <ion-input></ion-input>
+    </div>
+    <div class="input-row">
+      <p>Adresse email :</p>
+      <ion-input></ion-input>
+    </div>
+    <div class="input-row">
+      <p>Mot de passe :</p>
+      <ion-input type="password"></ion-input>
+    </div>
+    <div class="input-row">
+      <p>Nouveau mot de passe : </p>
+      <ion-input type="password"></ion-input>
+    </div>
+    <div class="input-row">
+      <p>Confirmation du mot de passe : </p>
+      <ion-input type="password"></ion-input>
+    </div>
+  </div>
+</ion-content>
+<div class="editAccountButtons">
+  <ion-button shape="round" fill="solid" color="light" (click)="closeEditAccountModal()">Fermer</ion-button>
+  <ion-button shape="round" fill="solid" color="warning" (click)="presentSaveInfoDialog()">Sauvegarder</ion-button>
+</div>
