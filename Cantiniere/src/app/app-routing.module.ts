@@ -9,22 +9,34 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'menu',
+    loadChildren: () => import('./pages/folder/folder.module').then(m => m.FolderPageModule),
+  },
+  {
+    path: 'user-account',
+    loadChildren: () => import('./pages/user-account/users-account.module').then(m => m.UsersAccountPageModule)
+  },
+  {
     path: 'admin',
     canActivate: [AuthGuard],
     loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminPageModule),
-  },
-  {
-    path: 'menu',
-    loadChildren: () => import('./pages/folder/folder.module').then(m => m.FolderPageModule),
   },
   {
     path: 'admin-menu',
     loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
   },
   {
+    path: 'admin-order-recap',
+    loadChildren: () => import('./pages/admin-order-recap/admin-recap.module').then(m => m.AdminRecapPageModule)
+  },
+  {
+    path: 'admin-user-accounts',
+    loadChildren: () => import('./pages/admin-user-accounts/admin-users.module').then(m => m.AdminUsersPageModule)
+  },
+  {
     path: 'admin-configuration',
     loadChildren: () => import('./pages/configuration/configuration.module').then( m => m.AdminConfigPageModule)
-  }  
+  },
 ];
 
 @NgModule({

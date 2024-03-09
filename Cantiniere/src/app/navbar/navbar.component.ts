@@ -6,6 +6,7 @@ import { MenuCardComponent } from '../components/menu-card/menu-card.component';
 import { AuthenticationService } from '../services/auth/authentication.service';
 import { DisconnectComponent } from '../components/auth/disconnect/disconnect.component';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +18,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -86,4 +88,37 @@ export class NavbarComponent implements OnInit {
   getUserRole(): Observable<string | null> {
     return this.authService.getUserRole();
   }
+
+  localUserRole(): string | null{
+    let role = null;
+    this.authService.getUserRole().subscribe(
+      res => role = res,
+      error => console.error(error),
+    );
+    return role;
+  }
+
+  //#region App Routing
+  /**
+   * Load a new page using the router
+   * @param url Router page's url
+   */
+  loadPage(url: string){
+    this.router.navigateByUrl(`/${url}`);
+  }
+
+  loadMainPage(){
+    let url = !this.isAuthenticated || this.localUserRole() !== 'ROLE_LUNCHLADY' ? 'menu' : 'admin';
+    this.router.navigateByUrl(url);
+  }
+
+  loadMenuPage(){
+    if(!this.isAuthenticated || this.localUserRole() !== 'ROLE_LUNCHLADY'){
+      this.openMenuCard();
+    }
+    else{
+      this.router.navigateByUrl('admin-menu');
+    }
+  }
+  //#endregion
 }

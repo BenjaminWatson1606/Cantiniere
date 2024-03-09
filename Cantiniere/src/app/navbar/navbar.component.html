@@ -15,15 +15,20 @@
       </svg>
     </ion-button>
     <ion-buttons slot="start">
-      <ion-button shape="round" fill="solid" color="warning"
-        >Plat de la semaine</ion-button
+      <ion-button
+      shape="round" 
+      fill="solid" 
+      color="warning"
+      (click)="loadMainPage()"
+      >Plat de la semaine</ion-button
+      
       >
       <ion-button
         class="button-nav"
         shape="round"
         fill="solid"
         color="warning"
-        (click)="openMenuCard()"
+        (click)="loadMenuPage()"
         >Carte</ion-button
       >
 
@@ -33,6 +38,7 @@
         shape="round"
         fill="solid"
         color="warning"
+        (click)="loadPage('admin-order-recap')"
         >Récap des commandes</ion-button
       >
 
@@ -42,6 +48,7 @@
         shape="round"
         fill="solid"
         color="warning"
+        (click)="loadPage('admin-user-accounts')"
         >Compte utilisateur</ion-button
       >
 
@@ -51,8 +58,8 @@
         shape="round"
         fill="solid"
         color="warning"
-      >
-        Configuration
+        (click)="loadPage('admin-configuration')"
+      > Configuration
       </ion-button>
     </ion-buttons>
     <div class="white_text" slot="end">
