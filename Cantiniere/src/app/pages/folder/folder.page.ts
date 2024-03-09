@@ -28,9 +28,4 @@ export class FolderPage implements OnInit {
     });
     return await modal.present();
   }
- 
-
-  
-
-
 }
