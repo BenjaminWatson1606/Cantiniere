@@ -127,6 +127,16 @@
       <p *ngIf="isAuthenticated" style="color: white">
         Bonjour {{ getFirstName() | async }}
       </p>
+
+      <ion-button *ngIf="!isAuthenticated || (getUserRole() | async) !== 'ROLE_LUNCHLADY'"
+        shape="round"
+        fill="solid"
+        color="warning"
+        (click)="openCartModal()">
+        <ion-icon
+        size="large"
+        name="cart-outline"/>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

@@ -7,6 +7,7 @@ import { AuthenticationService } from '../services/auth/authentication.service';
 import { DisconnectComponent } from '../components/auth/disconnect/disconnect.component';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { PopUpCartComponent } from '../components/pop-up-cart/pop-up-cart.component';
 
 @Component({
   selector: 'app-navbar',
@@ -74,6 +75,16 @@ export class NavbarComponent implements OnInit {
     const modal = await this.modalController.create({
       component: DisconnectComponent,
     });
+    return await modal.present();
+  }
+
+  /**
+   * Async operation to open cart pop up
+   */
+  async openCartModal(){
+    const modal = await this.modalController.create({
+      component: PopUpCartComponent,
+    })
     return await modal.present();
   }
 
