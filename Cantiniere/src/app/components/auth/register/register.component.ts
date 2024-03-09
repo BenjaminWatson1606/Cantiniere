@@ -10,7 +10,7 @@ import { RegisterService } from '../../../services/auth/register.service';
 })
 export class RegisterComponent implements OnInit {
   name: string = '';
-  surname: string = '';
+  firstname: string = '';
   email: string = '';
   password: string = '';
 
@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
   async register() {
     const userData = {
       name: this.name,
-      surname: this.surname,
+      firstname: this.firstname,
       email: this.email,
       password: this.password,
       sex: this.sex,

@@ -1,0 +1,67 @@
+<!-- ORDER DISCONNECTED USER POP UP -->
+<div class="header-title">Jour</div>
+<ion-content>
+  <div class="center-content">
+    <!-- ORDER DISCONNECTED USER TABLE -->
+    <!-- TODO FAIRE LE LIEN AVEC LE BACK-->
+    <table>
+      <!-- Dish 1 -->
+      <tr>
+        <td><ion-checkbox></ion-checkbox></td>
+        <td>Plat 1</td>
+        <td><ion-checkbox></ion-checkbox></td>
+        <td>Plat seul</td>
+        <td>
+          <div class="quantity-wrapper">
+            <ion-item>
+              <label>Quantity</label>
+              <ion-button (click)="decrementQuantity()">-</ion-button>
+              <ion-input type="number" [(ngModel)]="quantity" min="0"></ion-input>
+              <ion-button (click)="incrementQuantity()">+</ion-button>
+            </ion-item>
+          </div>
+        </td>
+        <td>
+          <ion-button shape="round" fill="solid" color="warning">Ajouter</ion-button>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td> <!-- Empty cell for alignment -->
+        <td><ion-checkbox></ion-checkbox></td>
+        <td>Formule</td>
+      </tr>
+      <tr>
+      </tr>
+
+      <!-- Dish 2 -->
+      <tr>
+        <td><ion-checkbox></ion-checkbox></td>
+        <td>Plat 2</td>
+        <td><ion-checkbox></ion-checkbox></td>
+        <td>Plat seul</td>
+        <td>
+          <div class="quantity-wrapper">
+            <ion-item>
+              <label>Quantity</label>
+              <ion-button (click)="decrementQuantity()">-</ion-button>
+              <ion-input type="number" [(ngModel)]="quantity" min="0"></ion-input>
+              <ion-button (click)="incrementQuantity()">+</ion-button>
+            </ion-item>
+          </div>
+        </td>
+        <td>
+          <ion-button shape="round" fill="solid" color="warning">Ajouter</ion-button>
+        </td>
+      <tr>
+        <td></td>
+        <td></td> <!-- Empty cell for alignment -->
+        <td><ion-checkbox></ion-checkbox></td>
+        <td>Formule</td>
+      </tr>
+    </table>
+  </div>
+</ion-content>
+<div class="cancelButton">
+  <ion-button shape="round" fill="solid" color="light" (click)="closeOrderModal()">Annuler</ion-button>
+</div>
