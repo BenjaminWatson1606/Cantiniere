@@ -5,6 +5,8 @@ import {
   ToastController,
 } from '@ionic/angular';
 import { LoginService } from '../../../services/auth/login.service';
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +21,9 @@ export class LoginComponent implements OnInit {
     private modalController: ModalController,
     private loginService: LoginService,
     private loadingController: LoadingController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private authService: AuthenticationService,
+    private router: Router,
   ) {}
 
   ngOnInit() {}
@@ -41,6 +45,7 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.email, this.password).subscribe(
         (response) => {
           console.log('Login response:', response);
+          this.redirectUser();
           this.presentSuccessToast('Connexion réussi');
         },
         (error) => {
@@ -81,12 +86,20 @@ export class LoginComponent implements OnInit {
   async closeModal() {
     await this.modalController.dismiss();
   }
-
   
   @Output() registerClicked = new EventEmitter<{ role: string }>();
 
   onRegisterClick() {
     console.log('Register button clicked');
     this.modalController.dismiss({ role: 'register' });
+  }
+
+  /**
+   * Redirect user to the corresponding user main page
+   * Admin main page is 'admin' page / Default main page is 'menu'
+   */
+  redirectUser(){
+    let redirection = this.authService.getLocalUserRole() == 'ROLE_LUNCHLADY' ? 'admin' : '/';
+    this.router.navigateByUrl(redirection);
   }
 }

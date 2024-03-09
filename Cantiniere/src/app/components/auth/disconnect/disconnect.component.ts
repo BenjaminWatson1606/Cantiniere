@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 
@@ -11,7 +12,8 @@ export class DisconnectComponent implements OnInit {
   constructor(
     private modalController: ModalController,
     private authService: AuthenticationService,
-    private toastController: ToastController 
+    private toastController: ToastController,
+    private router: Router,
   ) {}
 
   ngOnInit() {}
@@ -23,6 +25,7 @@ export class DisconnectComponent implements OnInit {
   async handleDisconnect() {
     localStorage.removeItem('token');
     this.authService.setAuthenticated(false);
+    this.router.navigateByUrl('/'); //Navigate to main page
     await this.presentToast();
     await this.modalController.dismiss();
   }
