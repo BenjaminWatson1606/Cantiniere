@@ -35,7 +35,7 @@ const routes: Routes = [
   },
   {
     path: 'admin-configuration',
-    loadChildren: () => import('./pages/configuration/configuration.module').then( m => m.AdminConfigPageModule)
+    loadChildren: () => import('./pages/admin-configuration/configuration.module').then( m => m.AdminConfigPageModule)
   },
 ];
 

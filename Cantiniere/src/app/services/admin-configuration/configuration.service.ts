@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
 import { Configuration } from 'src/app/interfaces/configuration';
@@ -8,7 +8,7 @@ import { AuthenticationService } from '../auth/authentication.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ConfigurationService {
+export class ConfigurationService{
 
   constructor(
     private http: HttpClient,
