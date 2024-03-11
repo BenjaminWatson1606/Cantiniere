@@ -72,7 +72,7 @@
       </ion-button>
     </ion-buttons>
     <div class="white_text" slot="end">
-      ⏱︎ Commandes acceptées jusqu'à {{ (configuration$ | async)?.orderTimeLimit }}
+      ⏱︎ Commandes acceptées jusqu'à {{ (configuration$ | async)?.orderTimeLimit?.replace(':', 'h')?.slice(0, 5)}}
     </div>
     <!-- {{getOrderLimit() | date:'h:mm a'}} -->
     <ion-buttons slot="end">
