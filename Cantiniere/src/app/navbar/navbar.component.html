@@ -72,8 +72,9 @@
       </ion-button>
     </ion-buttons>
     <div class="white_text" slot="end">
-      ⏱︎ Commandes acceptées jusqu'à 10h30
+      ⏱︎ Commandes acceptées jusqu'à {{ (configuration$ | async)?.orderTimeLimit }}
     </div>
+    <!-- {{getOrderLimit() | date:'h:mm a'}} -->
     <ion-buttons slot="end">
       <ion-button
         *ngIf="!isAuthenticated"

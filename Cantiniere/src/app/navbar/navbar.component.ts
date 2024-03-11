@@ -8,6 +8,8 @@ import { DisconnectComponent } from '../components/auth/disconnect/disconnect.co
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { PopUpCartComponent } from '../components/pop-up-cart/pop-up-cart.component';
+import { Configuration } from '../interfaces/configuration';
+import { ConfigurationService } from '../services/admin-configuration/configuration.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,10 +18,12 @@ import { PopUpCartComponent } from '../components/pop-up-cart/pop-up-cart.compon
 })
 export class NavbarComponent implements OnInit {
   isAuthenticated: boolean = false;
+  configuration$!: Observable<Configuration>;
 
   constructor(
     private modalController: ModalController,
     private authService: AuthenticationService,
+    private configService: ConfigurationService,
     private router: Router,
   ) {}
 
@@ -29,6 +33,7 @@ export class NavbarComponent implements OnInit {
     });
 
     this.isAuthenticated = this.authService.isAuthenticated();
+    this.configuration$ = this.configService.getConfigurationById(1);
   }
 
   async openLoginModal() {
