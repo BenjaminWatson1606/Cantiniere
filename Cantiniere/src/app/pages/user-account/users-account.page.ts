@@ -3,6 +3,10 @@ import { ModalController, AlertController } from '@ionic/angular';
 import { PopUpOrderComponent } from 'src/app/components/pop-up-order/pop-up-order.component';
 import { PopUpCartComponent } from 'src/app/components/pop-up-cart/pop-up-cart.component';
 import { UsersEditAccountComponent } from 'src/app/components/users-edit-account/users-edit-account.component';
+
+import { User } from 'src/app/interfaces/user';
+import { UserService } from 'src/app/services/user/user.service';
+
 @Component({
   selector: 'app-users-account',
   templateUrl: './users-account.page.html',
@@ -10,13 +14,22 @@ import { UsersEditAccountComponent } from 'src/app/components/users-edit-account
 })
 export class UsersAccountPage implements OnInit {
 
+  user!: User;
+
   constructor(
     private modalController: ModalController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private userService: UserService,
   ) { }
 
   ngOnInit() {
+    //get user informations from service
+    this.userService.getUserInformations()?.subscribe(
+      res => this.user = res,
+      error => console.error(error),
+    );
   }
+
   // Open the order pop up
   async openOrderModal() {
     const modal = await this.modalController.create({

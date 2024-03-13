@@ -28,15 +28,15 @@
 <div class="center-box">
   <div class="content-box">
     <div class="header-title">Mon compte</div>
-    <ion-content class="divAccount">
+    <ion-content class="divAccount" *ngIf="user">
       <div class="right-content">
-        <p class="cagnotte">Cagnotte : €</p>
+        <p class="cagnotte">Cagnotte : {{ user.wallet }}€</p>
       </div>
       <div class="accountText">
         <!-- TODO FAIRE LE LIEN AVEC LE BACK-->
-        <p>Prénom : </p>
-        <p>Nom : </p>
-        <p>Adresse email : </p>
+        <p>Prénom : {{ user.firstname }}</p>
+        <p>Nom : {{ user.name }}</p>
+        <p>Adresse email : {{ user.email }}</p>
       </div>
       <!-- Order recap -->
       <div class="recap-square">
