@@ -5,7 +5,7 @@ import { PopUpCartComponent } from 'src/app/components/pop-up-cart/pop-up-cart.c
 import { UsersEditAccountComponent } from 'src/app/components/users-edit-account/users-edit-account.component';
 
 import { User } from 'src/app/interfaces/user';
-import { UserService } from 'src/app/services/user/user.service';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-users-account',
@@ -20,18 +20,18 @@ export class UsersAccountPage implements OnInit {
   constructor(
     private modalController: ModalController,
     private alertController: AlertController,
-    private userService: UserService,
+    private usersService: UsersService,
   ) { }
 
   ngOnInit() {
     //get user informations from services
-    this.userService.getUserInformations()?.subscribe(
+    this.usersService.getUserInformations()?.subscribe(
       res => this.user = res,
       error => console.error(error),
     );
 
     //Get user orders
-    this.userService.getUserOrders()?.subscribe(
+    this.usersService.getUserOrders()?.subscribe(
       res => {
         this.orders = res as [];
         const debug = this.orders.length <= 0 ? "No orders found" : `${this.orders.length} orders found`;

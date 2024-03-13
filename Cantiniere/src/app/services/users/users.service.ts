@@ -8,13 +8,14 @@ import { User } from 'src/app/interfaces/user';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UsersService {
   
   constructor(
     private auth: AuthenticationService,
     private http: HttpClient,
   ){}
   
+  //#region Single User Methods
   /**
    * Get user informations from the database using its id
    * The calbback requires a valid user token and a valid user id
@@ -43,4 +44,19 @@ export class UserService {
     const url = `http://localhost:8080/stone.lunchtime/order/findallforuser/${id}?status=${status}&beginDate=${beginDate}&endDate=${endDate}`;
     return this.http.get(url, { headers: headers});
   }
+  //#endregion
+
+  //#region Global Users Methods
+  /**
+   * Get an observable that returns all users from database
+   */
+  getAllUsers(): Observable<User[]> | undefined{
+    const token = this.auth.getUserToken();
+    if(!token) return undefined; //Check user token / id
+
+    const url = 'http://localhost:8080/stone.lunchtime/user/findall';
+    return this.http.get(url, { headers: this.auth.getHttpHeader(token)})
+      .pipe(map(res => res as User[]));
+  }
+  //#endregion
 }
