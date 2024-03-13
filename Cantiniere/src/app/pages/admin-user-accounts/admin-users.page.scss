@@ -1,63 +1,43 @@
-// HEADER
-// header color
-.header {
-    --background: rgb(29, 29, 29) !important;
-}
-
-
-// header logo
-.logo {
-    margin-left: 10px;
-}
-
-// header text
-.white_text {
-    color: white;
-    font-size: 14px !important;
-    margin-right: 10px;
-}
-
-// table
-.center-content {
+//search bar
+.search-container{
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    flex-direction: row;
+    margin-top: 75px;
+    margin-bottom: 2%;
 }
 
-table {
-    border-collapse: collapse;
-    width: 30%;
+.custom-searchbar {
+    --background: #ffffff;
+    --border-color: #cccccc;
+    --border-radius: 20px;
+    --placeholder-color: #999999;
+    --searchbar-icon-color: #666666;
+    width: 20%;
 }
 
-table,
-th,
-td {
-    border: 1px solid black;
-    padding: 5px;
+//grid
+.grid{
+    padding: 0% 15%;
+    margin-bottom: 3%;
 }
 
-.tabButtons {
-    margin-bottom: 20px;
-}
-
-.tableColor {
+.grid-header{
     background-color: rgb(29, 29, 29);
-}
-
-.tableTitle {
     color: white;
 }
 
-
-.cells {
+.grid > ion-row > ion-col{
     text-align: center;
+    border: solid;
+    border-color: rgb(124, 124, 124);
+    border-width: 1px;
 }
 
-.tableFirstRow {
-    background-color: rgb(190, 190, 190);
-    font-weight: bolder;
+.grid > ion-row > ion-col > ion-button{
+    width: auto;
+    height: auto;
 }
 
 // filter 
@@ -73,14 +53,4 @@ td {
 
 .arrow.up {
     border-width: 0 4px 5px 4px;
-}
-
-//search bar
-.custom-searchbar {
-    --background: #ffffff;
-    --border-color: #cccccc;
-    --border-radius: 20px;
-    --placeholder-color: #999999;
-    --searchbar-icon-color: #666666;
-    width: 20%;
 }

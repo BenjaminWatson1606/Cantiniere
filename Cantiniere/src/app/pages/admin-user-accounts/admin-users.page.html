@@ -1,79 +1,58 @@
-<!--HEADER-->
-<ion-header>
-  <ion-toolbar class="header">
-    <!--logo-->
-    <ion-button slot="start" fill="clear">
-      <img class="logo" src="/assets/Pictures/logo.png" alt="Logo" width="50" height="50">
-    </ion-button>
-    <!--Carte, Plats de la semaine, Commandes buttons-->
-    <ion-buttons slot="start">
-      <ion-button shape="round" fill="solid" color="warning" routerLink="/admin">Plat de la semaine</ion-button>
-      <ion-button shape="round" fill="solid" color="warning" routerLink="/admin-board">Carte</ion-button>
-      <ion-button shape="round" fill="solid" color="warning" routerLink="/admin-recap">Commandes</ion-button>
-    </ion-buttons>
-    <!--Utilisateur, Configuration, Mon compte buttons-->
-    <ion-buttons>
-      <ion-button shape="round" fill="solid" color="warning" routerLink="/admin-users">Utilisateurs</ion-button>
-      <ion-button shape="round" fill="solid" color="warning"
-        routerLink="/admin-configuration">Configuration</ion-button>
-    </ion-buttons>
-    <!-- Log out button -->
-    <ion-buttons slot="end">
-      <ion-button shape="round" color="light">
-        <ion-icon name="arrow-forward-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <!-- Welcome user -->
-    <div class="white_text" slot="end">Bonjour Admin</div>
-  </ion-toolbar>
-</ion-header>
-
-<!-- SEARCH USER TABLE -->
+<!-- Search bar -->
 <ion-content class="ion-padding">
-  <div class="center-content">
+  <div class="search-container">
     <!-- TODO FAIRE LA FONCTION RECHERCHER UN UTILISATEUR-->
-    <ion-searchbar class="custom-searchbar"></ion-searchbar>
-    <ion-buttons class="tabButtons">
-      <ion-button fill="solid" color="warning">Rechercher</ion-button>
-    </ion-buttons>
-
-    <!-- USER TABLE-->
-    <!-- TODO FAIRE LE LIEN AVEC LE BACK-->
-    <table class="cells">
-      <!--ligne 1 : Table title -->
-      <tr class="tableColor">
-        <td colspan="4" class="tableTitle">Rechercher un utilisateur</td>
-      </tr>
-      <!--ligne 2 : Prénom, Nom, Email, Détails -->
-      <tr class="tableFirstRow">
-        <td class="filter-cell">Prénom <span class="arrow"></span></td>
-        <td class="filter-cell">Nom <span class="arrow"></span></td>
-        <td class="filter-cell">Email <span class="arrow"></span></td>
-        <td class="filter-cell">Détails <span class="arrow"></span></td>
-      </tr>
-      <!--ligne 3 -->
-      <tr>
-        <td>Prénom 1</td>
-        <td>Nom 1</td>
-        <td>Email 1</td>
-        <!-- TODO FAIRE LE POP UP DETAILS DU USER (en cours)-->
-        <td>
-          <ion-button shape="round" color="light" fill="solid" (click)="openUserDetailsModal()">
-            <ion-icon name="eye-outline"></ion-icon>
-          </ion-button>
-        </td>
-      </tr>
-      <!--ligne 4 -->
-      <tr>
-        <td>Prénom 2</td>
-        <td>Nom 2</td>
-        <td>Email 2</td>
-        <td>
-          <ion-button shape="round" color="light" fill="solid" (click)="openUserDetailsModal()">
-            <ion-icon name="eye-outline"></ion-icon>
-          </ion-button>
-        </td>
-      </tr>
-    </table>
+    <ion-searchbar
+    class="custom-searchbar"
+    placeholder="Rechercher..."
+    [(ngModel)]="searchTerm"
+    (ionInput)="applyFilter()"
+    ></ion-searchbar>
+    <ion-button 
+    fill="solid" 
+    color="warning"
+    (click)="applyFilter()"
+    >Rechercher</ion-button>
+  </div>
+  
+  <!-- User list-->
+  <!-- TODO FAIRE LE LIEN AVEC LE BACK--> 
+  <div style="flex-direction: column;">
+    <ion-grid class="grid">
+      <ion-row class="grid-header">
+        <ion-col>Liste des utilisateurs</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>Prénom<span class="arrow"></span></ion-col>
+        <ion-col>Nom<span class="arrow"></span></ion-col>
+        <ion-col>Email<span class="arrow"></span></ion-col>
+        <ion-col>Détails<span class="arrow"></span></ion-col>
+      </ion-row>
+      @if(users.length > 0) {
+        <ion-row *ngFor="let user of getTemplateList();">
+          <ion-col>
+            <p>{{user.firstname}}</p>
+          </ion-col>
+          <ion-col>
+            <p>{{user.name}}</p>
+          </ion-col>
+          <ion-col>
+            <p>{{user.email}}</p>
+          </ion-col>
+          <ion-col>
+            <ion-button shape="round" color="light" fill="solid" (click)="openUserDetailsModal()">
+              <ion-icon name="eye-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      }
+      @else {
+        <ion-row>
+          <ion-col>
+            <p>Aucun utilisateur trouvé.</p>
+          </ion-col>
+        </ion-row>
+      }
+    </ion-grid>
   </div>
 </ion-content>
