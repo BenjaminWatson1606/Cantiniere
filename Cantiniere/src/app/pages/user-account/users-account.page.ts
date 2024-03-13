@@ -15,6 +15,7 @@ import { UserService } from 'src/app/services/user/user.service';
 export class UsersAccountPage implements OnInit {
 
   user!: User;
+  orders!: any;
 
   constructor(
     private modalController: ModalController,
@@ -23,11 +24,21 @@ export class UsersAccountPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    //get user informations from service
+    //get user informations from services
     this.userService.getUserInformations()?.subscribe(
       res => this.user = res,
       error => console.error(error),
     );
+
+    //Get user orders
+    this.userService.getUserOrders()?.subscribe(
+      res => {
+        this.orders = res as [];
+        const debug = this.orders.length <= 0 ? "No orders found" : `${this.orders.length} orders found`;
+        console.log(debug);
+      },
+      error => console.error(error),
+    )
   }
 
   // Open the order pop up

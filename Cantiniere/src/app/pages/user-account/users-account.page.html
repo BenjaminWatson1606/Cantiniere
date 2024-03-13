@@ -42,7 +42,14 @@
       <div class="recap-square">
         <h3>Commande en cours</h3>
         <div class="recap-content">
-          <p>Commande</p>
+          @if(orders && orders.length > 0){
+            @for (order of orders; track $index) {
+              <p>Order n°{{$index + 1}}</p>
+            }
+          }
+          @else {
+            <p>Aucune commande en cours.</p>
+          }
         </div>
       </div>
 
