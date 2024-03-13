@@ -23,7 +23,7 @@ const routes: Routes = [
   },
   {
     path: 'admin-menu',
-    loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
+    loadChildren: () => import('./pages/admin-menu/menu.module').then( m => m.MenuPageModule)
   },
   {
     path: 'admin-order-recap',
