@@ -8,13 +8,15 @@ import { UsersAccountPageRoutingModule } from './users-account-routing.module';
 
 import { UsersAccountPage } from './users-account.page';
 import { UsersEditAccountComponent } from 'src/app/components/users-edit-account/users-edit-account.component';
+import { OrderCardModule } from 'src/app/components/order-card/order-card.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    UsersAccountPageRoutingModule
+    UsersAccountPageRoutingModule,
+    OrderCardModule
   ],
   declarations: [UsersAccountPage, UsersEditAccountComponent]
 })

@@ -1,30 +1,3 @@
-<!-- Users header-->
-<ion-header>
-  <ion-toolbar class="header">
-    <ion-button slot="start" fill="clear">
-      <img class="logo" src="/assets/Pictures/logo.png" alt="Logo" width="50" height="50">
-    </ion-button>
-    <!-- Palt de la semaine, Carte, Mon compte buttons -->
-    <ion-buttons slot="start">
-      <ion-button shape="round" fill="solid" color="warning" routerLink="/users">Plat de la semaine</ion-button>
-      <ion-button shape="round" fill="solid" color="warning">Carte</ion-button>
-      <ion-button shape="round" fill="solid" color="warning" routerLink="/users-account">Mon Compte</ion-button>
-    </ion-buttons>
-    <!-- Log out, Welcome, Cart buttons-->
-    <ion-buttons slot="end">
-      <ion-button shape="round" color="light">
-        <ion-icon name="arrow-forward-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <div class="white_text" slot="end">Bonjour user123 !</div>
-    <ion-buttons slot="end">
-      <ion-button shape="round" color="warning" (click)="openCartModal()">
-        <ion-icon name="cart-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <div class="center-box">
   <div class="content-box">
     <div class="header-title">Mon compte</div>
@@ -42,9 +15,10 @@
       <div class="recap-square">
         <h3>Commande en cours</h3>
         <div class="recap-content">
+          <!-- Loops through orders -->
           @if(orders && orders.length > 0){
             @for (order of orders; track $index) {
-              <p>Order n°{{$index + 1}}</p>
+              <app-order-card [order]="order"></app-order-card>
             }
           }
           @else {

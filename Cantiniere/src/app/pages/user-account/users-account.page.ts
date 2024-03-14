@@ -6,6 +6,8 @@ import { UsersEditAccountComponent } from 'src/app/components/users-edit-account
 
 import { User } from 'src/app/interfaces/user';
 import { UsersService } from 'src/app/services/users/users.service';
+import { Order } from 'src/app/interfaces/order';
+import { OrdersService } from 'src/app/services/orders/orders.service';
 
 @Component({
   selector: 'app-users-account',
@@ -15,12 +17,13 @@ import { UsersService } from 'src/app/services/users/users.service';
 export class UsersAccountPage implements OnInit {
 
   user!: User;
-  orders!: any;
+  orders: Order[] = [];
 
   constructor(
     private modalController: ModalController,
     private alertController: AlertController,
     private usersService: UsersService,
+    private ordersService: OrdersService,
   ) { }
 
   ngOnInit() {
@@ -31,16 +34,18 @@ export class UsersAccountPage implements OnInit {
     );
 
     //Get user orders
-    this.usersService.getUserOrders()?.subscribe(
-      res => {
-        this.orders = res as [];
-        const debug = this.orders.length <= 0 ? "No orders found" : `${this.orders.length} orders found`;
-        console.log(debug);
-      },
+    this.ordersService.getLocalUserOrders()?.subscribe(
+      res => this.orders = res,
       error => console.error(error),
     )
   }
+  
+  //Get order date from ordersService
+  getOrderDate(order: Order){
+    return this.ordersService.getOrderDate(order);
+  }
 
+  //#region Modal methods
   // Open the order pop up
   async openOrderModal() {
     const modal = await this.modalController.create({
@@ -88,4 +93,5 @@ export class UsersAccountPage implements OnInit {
     });
     await alert.present();
   }
+  //#endregion
 }
