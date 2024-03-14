@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
+
+import { User } from 'src/app/interfaces/user';
+import { Order } from 'src/app/interfaces/order';
+import { OrdersService } from 'src/app/services/orders/orders.service';
 
 @Component({
   selector: 'app-admin-users-details',
@@ -7,14 +11,27 @@ import { ModalController, AlertController } from '@ionic/angular';
   styleUrls: ['./admin-users-details.component.scss'],
 })
 export class AdminUsersDetailsComponent implements OnInit {
+  
+  @Input() user!: User;
+  orders: Order[] = [];
+
   showInputField = false;
+
+  credit: string = "";
+  sold: string = "";
 
   constructor(
     private modalController: ModalController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private ordersService: OrdersService,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.ordersService.getOrdersByUserId(this.user.id)?.subscribe(
+      res => this.orders = res,
+      error => console.error(error)
+    );
+  }
 
   // display input when crediter and solder button are clicked
   toggleInputField() {
@@ -66,6 +83,4 @@ export class AdminUsersDetailsComponent implements OnInit {
   closeUsersDetailsModal() {
     this.modalController.dismiss();
   }
-
-
 }

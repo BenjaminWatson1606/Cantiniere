@@ -30,9 +30,9 @@ export class AdminUsersPage implements OnInit {
   }
 
   // Open the user details pop up
-  async openUserDetailsModal() {
+  async openUserDetailsModal(user: User) {
     const modal = await this.modalController.create({
-      component: AdminUsersDetailsComponent, componentProps: {},
+      component: AdminUsersDetailsComponent, componentProps: {user},
     });
     return await modal.present();
   }
