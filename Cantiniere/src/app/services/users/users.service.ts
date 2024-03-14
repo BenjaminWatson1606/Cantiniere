@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
 import { User } from 'src/app/interfaces/user';
+import { Order } from 'src/app/interfaces/order';
 
 @Injectable({
   providedIn: 'root'
@@ -32,23 +33,12 @@ export class UsersService {
     return this.http.get(`http://localhost:8080/stone.lunchtime/user/find/${id}`, { headers: headers})
       .pipe(map(res => res as User));
   }
-
-  getUserOrders(status: 'CREATED'|'DELIVERED'|'CANCELLED' = 'CREATED', beginDate: string = '', endDate: string = ''){
-    const token = this.auth.getUserToken();
-    let id;
-    this.auth.userId$.subscribe(res => id = res);
-    if(!token || !id) return undefined; //Check user token / id
-
-    //else, get user informtions from the ddb
-    const headers = this.auth.getHttpHeader(token);
-    const url = `http://localhost:8080/stone.lunchtime/order/findallforuser/${id}?status=${status}&beginDate=${beginDate}&endDate=${endDate}`;
-    return this.http.get(url, { headers: headers});
-  }
   //#endregion
 
   //#region Global Users Methods
   /**
    * Get an observable that returns all users from database
+   * Don't include admin accounts in the returned output
    */
   getAllUsers(): Observable<User[]> | undefined{
     const token = this.auth.getUserToken();
@@ -56,7 +46,11 @@ export class UsersService {
 
     const url = 'http://localhost:8080/stone.lunchtime/user/findall';
     return this.http.get(url, { headers: this.auth.getHttpHeader(token)})
-      .pipe(map(res => res as User[]));
+      .pipe(map(res => {
+        let users = res as User[];
+        users = users.filter(u => u.isLunchLady === false);
+        return users;
+      }));
   }
   //#endregion
 }
