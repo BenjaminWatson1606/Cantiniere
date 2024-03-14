@@ -1,0 +1,6 @@
+<div *ngFor="let item of order.quantity;">
+  <ion-card>
+    <ion-card-title>{{ getOrderDate(order).day }}</ion-card-title>
+    <ion-card-content>{{ item.meal?.label }} : {{ item.meal?.priceDF }}€</ion-card-content>
+  </ion-card>
+</div>
