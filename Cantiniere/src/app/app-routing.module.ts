@@ -23,18 +23,22 @@ const routes: Routes = [
   },
   {
     path: 'admin-menu',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./pages/admin-menu/menu.module').then( m => m.MenuPageModule)
   },
   {
     path: 'admin-order-recap',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./pages/admin-order-recap/admin-recap.module').then(m => m.AdminRecapPageModule)
   },
   {
     path: 'admin-user-accounts',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./pages/admin-user-accounts/admin-users.module').then(m => m.AdminUsersPageModule)
   },
   {
     path: 'admin-configuration',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./pages/admin-configuration/configuration.module').then( m => m.AdminConfigPageModule)
   },
 ];

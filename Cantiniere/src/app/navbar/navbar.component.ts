@@ -107,7 +107,7 @@ export class NavbarComponent implements OnInit {
 
   /**
    * Indicated if the user has the given role
-   * @returns Returns true if the has the given role, else returns false
+   * @returns Returns true if the user has the given role, else returns false
    */
   UserHasRole(role: string): boolean{
     return this.authService.getLocalUserRole() == role;
