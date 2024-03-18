@@ -104,6 +104,10 @@ export class AuthenticationService {
     return this.firstName$;
   }
 
+  getUserId(): Observable<number | null> {
+    return this.userId$;
+  }
+
   getUserRole(): Observable<string | null> {
     return this.userRole$;
   }

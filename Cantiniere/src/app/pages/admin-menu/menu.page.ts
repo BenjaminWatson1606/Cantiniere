@@ -29,7 +29,7 @@ export class MenuPage implements OnInit {
   
   ngOnInit() {
     this.categories = this.mealService.getMealCategories();
-    this.mealService.getWeeklyMeals().subscribe((data) => {
+    this.mealService.getAllMeals().subscribe((data) => {
       this.meals = data;
       this.selectMealCategory(this.categories[3]);
     })

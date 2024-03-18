@@ -1,9 +1,37 @@
 <div class="header-title">{{ day }}</div>
 <ion-content>
-  <div class="center-content">
-  
+  <div class="meal-list">
+    <div class="meal-item" *ngFor="let meal of dailyMeals">
+      <ion-checkbox class="checkbox-custom" [(ngModel)]="meal.selected"></ion-checkbox>
+      <div class="meal-details">
+        <span class="meal-label">{{ meal.label }}</span>
+        <span class="meal-price">{{ meal.priceDF }} €</span>
+        <div class="quantity-modifier" *ngIf="meal.selected">
+          <div class="quantity-buttons">
+            <ion-button (click)="decrementQuantity(meal)">-</ion-button>
+            <span class="quantity-text">{{ getMealQuantity(meal.id) }}</span>
+            <ion-button (click)="incrementQuantity(meal)">+</ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </ion-content>
-<div class="cancelButton">
-  <ion-button shape="round" fill="solid" color="light" (click)="closeOrderModal()">Annuler</ion-button>
+<div class="buttonsBottom">
+  <ion-button
+    class="cancelButton"
+    shape="round"
+    fill="solid"
+    color="light"
+    (click)="closeOrderModal()"
+    >Annuler</ion-button
+  >
+  <ion-button
+    class="orderButton"
+    shape="round"
+    fill="solid"
+    color="warning"
+    (click)="orderItems()"
+    >Commander</ion-button
+  >
 </div>
