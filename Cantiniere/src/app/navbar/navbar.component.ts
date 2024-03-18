@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
     private modalController: ModalController,
     private authService: AuthenticationService,
     private configService: ConfigurationService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -86,10 +86,10 @@ export class NavbarComponent implements OnInit {
   /**
    * Async operation to open cart pop up
    */
-  async openCartModal(){
+  async openCartModal() {
     const modal = await this.modalController.create({
       component: PopUpCartComponent,
-    })
+    });
     return await modal.present();
   }
 
@@ -109,7 +109,7 @@ export class NavbarComponent implements OnInit {
    * Indicated if the user has the given role
    * @returns Returns true if the user has the given role, else returns false
    */
-  UserHasRole(role: string): boolean{
+  UserHasRole(role: string): boolean {
     return this.authService.getLocalUserRole() == role;
   }
 
@@ -118,7 +118,7 @@ export class NavbarComponent implements OnInit {
    * Load a new page using the router
    * @param url Router page's url
    */
-  loadPage(url: string){
+  loadPage(url: string) {
     this.router.navigateByUrl(`/${url}`);
   }
 
@@ -126,8 +126,11 @@ export class NavbarComponent implements OnInit {
    * Load main page based on the user role
    * Load 'menu' page for default users and load 'admin' page for admins
    */
-  loadMainPage(){
-    let url = !this.isAuthenticated || !this.UserHasRole('ROLE_LUNCHLADY') ? 'menu' : 'admin';
+  loadMainPage() {
+    let url =
+      !this.isAuthenticated || !this.UserHasRole('ROLE_LUNCHLADY')
+        ? 'menu'
+        : 'admin';
     this.router.navigateByUrl(url);
   }
 
@@ -135,11 +138,10 @@ export class NavbarComponent implements OnInit {
    * Load card menu page based on the user role
    * Open menu pop up for default users and load 'admin-menu' page for admins
    */
-  loadMenuPage(){
-    if(!this.isAuthenticated || !this.UserHasRole('ROLE_LUNCHLADY')){
+  loadMenuPage() {
+    if (!this.isAuthenticated || !this.UserHasRole('ROLE_LUNCHLADY')) {
       this.openMenuCard();
-    }
-    else{
+    } else {
       this.router.navigateByUrl('admin-menu');
     }
   }

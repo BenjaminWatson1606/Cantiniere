@@ -1,57 +1,51 @@
-<!-- Search bar -->
 <ion-content class="ion-padding">
   <div class="search-container">
-    <!-- TODO FAIRE LA FONCTION RECHERCHER UN UTILISATEUR-->
     <ion-searchbar
-    class="custom-searchbar"
-    placeholder="Rechercher..."
-    [(ngModel)]="searchTerm"
-    (ionInput)="applyFilter()"
+      class="custom-searchbar"
+      placeholder="Rechercher..."
+      [(ngModel)]="searchTerm"
+      (ionInput)="applyFilter()"
     ></ion-searchbar>
-    <ion-button 
-    fill="solid" 
-    color="warning"
-    (click)="applyFilter()"
-    >Rechercher</ion-button>
+    <ion-button fill="solid" color="warning" (click)="applyFilter()">Rechercher</ion-button>
   </div>
-  
+
   <!-- User list-->
-  <!-- TODO FAIRE LE LIEN AVEC LE BACK--> 
-  <div style="flex-direction: column;">
+  <div style="flex-direction: column">
     <ion-grid class="grid">
       <ion-row class="grid-header">
-        <ion-col>Liste des utilisateurs</ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>Prénom<span class="arrow"></span></ion-col>
-        <ion-col>Nom<span class="arrow"></span></ion-col>
-        <ion-col>Email<span class="arrow"></span></ion-col>
-        <ion-col>Détails<span class="arrow"></span></ion-col>
+        <ion-col size="3">Prénom<span class="arrow"></span></ion-col>
+        <ion-col size="3">Nom<span class="arrow"></span></ion-col>
+        <ion-col size="3">Email<span class="arrow"></span></ion-col>
+        <ion-col size="3">Détails<span class="arrow"></span></ion-col>
       </ion-row>
       @if(users.length > 0) {
-        <ion-row *ngFor="let user of getTemplateList();">
-          <ion-col>
-            <p>{{user.firstname}}</p>
-          </ion-col>
-          <ion-col>
-            <p>{{user.name}}</p>
-          </ion-col>
-          <ion-col>
-            <p>{{user.email}}</p>
-          </ion-col>
-          <ion-col>
-            <ion-button shape="round" color="light" fill="solid" (click)="openUserDetailsModal(user)">
-              <ion-icon name="eye-outline"></ion-icon>
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      }
-      @else {
-        <ion-row>
-          <ion-col>
-            <p>Aucun utilisateur trouvé.</p>
-          </ion-col>
-        </ion-row>
+      <ion-row *ngFor="let user of getTemplateList();">
+        <ion-col size="3">
+          <p class="truncate-text">{{user.firstname}}</p>
+        </ion-col>
+        <ion-col size="3">
+          <p class="truncate-text">{{user.name}}</p>
+        </ion-col>
+        <ion-col size="3">
+          <p class="truncate-text">{{user.email}}</p>
+        </ion-col>
+        <ion-col size="3">
+          <ion-button
+            shape="round"
+            color="light"
+            fill="solid"
+            (click)="openUserDetailsModal(user)"
+          >
+            <ion-icon name="eye-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      } @else {
+      <ion-row>
+        <ion-col>
+          <p>Aucun utilisateur trouvé.</p>
+        </ion-col>
+      </ion-row>
       }
     </ion-grid>
   </div>

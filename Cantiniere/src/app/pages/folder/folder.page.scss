@@ -64,10 +64,11 @@
   border-radius: 1rem;
   font-weight: bold;
   text-align: center;
-  line-height: 100px;
   text-decoration: none;
   display: block;
   color: black;
+  justify-content: center;
+  display: flex;
 }
 
 .sub-panel:hover {

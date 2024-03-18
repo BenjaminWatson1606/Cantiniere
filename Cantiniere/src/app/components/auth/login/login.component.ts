@@ -94,12 +94,7 @@ export class LoginComponent implements OnInit {
     this.modalController.dismiss({ role: 'register' });
   }
 
-  /**
-   * Redirect user to the corresponding user main page
-   * Admin main page is 'admin' page / Default main page is 'menu'
-   */
   redirectUser(){
-    let redirection = this.authService.getLocalUserRole() == 'ROLE_LUNCHLADY' ? 'admin' : '/';
-    this.router.navigateByUrl(redirection);
+    this.router.navigateByUrl("/menu");
   }
 }

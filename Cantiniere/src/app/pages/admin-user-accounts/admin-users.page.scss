@@ -54,3 +54,9 @@
 .arrow.up {
     border-width: 0 4px 5px 4px;
 }
+
+.truncate-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
