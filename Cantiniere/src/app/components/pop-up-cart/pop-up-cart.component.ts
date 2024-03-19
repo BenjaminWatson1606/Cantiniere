@@ -29,7 +29,9 @@ export class PopUpCartComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.currentDay = new Date().toLocaleDateString('fr-FR', { weekday: 'long' });
+    this.currentDay = new Date().toLocaleDateString('fr-FR', {
+      weekday: 'long',
+    });
 
     // Subscribe to authentication status changes
     this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
@@ -52,7 +54,7 @@ export class PopUpCartComponent implements OnInit {
         });
       } else {
         this.userId = null;
-        this.userOrders = []; // Clear orders when the user is not authenticated
+        this.userOrders = [];
       }
     });
   }
@@ -126,13 +128,15 @@ export class PopUpCartComponent implements OnInit {
   }
 
   calculateTotalOrderPrice() {
-    this.totalOrderPrice = this.userOrders.reduce(
-      (total, order) =>
-        total +
-        (order.quantity[0]?.meal?.priceDF || 0) *
-          (order.quantity[0]?.quantity || 0),
-      0
-    );
+    this.totalOrderPrice = this.userOrders.reduce((total, order) => {
+      
+      const orderPrice = order.quantity.reduce((subtotal, item) => {
+        return subtotal + (item.meal?.priceDF || 0) * (item.quantity || 0);
+      }, 0);
+
+     
+      return total + orderPrice;
+    }, 0);
   }
 
   // Close the cart modal

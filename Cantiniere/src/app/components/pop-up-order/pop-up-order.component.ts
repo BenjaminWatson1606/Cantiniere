@@ -66,14 +66,18 @@ export class PopUpOrderComponent implements OnInit {
   }
 
   orderItems() {
-    // Calculate total quantity of selected meals
-    const totalQuantity = this.dailyMeals
-      .filter((meal) => meal.selected)
-      .reduce((total, meal) => total + (this.mealQuantities[meal.id] || 0), 0);
+    // Collect all selected meals and their quantities
+    const selectedMeals = this.dailyMeals.filter((meal) => meal.selected);
+    const orderItems = selectedMeals.map((meal) => ({
+      mealId: meal.id,
+      quantity: this.mealQuantities[meal.id] || 0,
+    }));
 
-    // If total quantity is 0, don't proceed with the order
-    if (totalQuantity === 0) {
-      this.errorToast('Il faut ajouter au moins un plat ou menu pour commander');
+    // If no items are selected, show an error message
+    if (orderItems.length === 0) {
+      this.errorToast(
+        'Il faut ajouter au moins un plat ou menu pour commander'
+      );
       console.log('No items selected for order.');
       return;
     }
@@ -82,13 +86,7 @@ export class PopUpOrderComponent implements OnInit {
     const orderPayload = {
       userId: this.userId || 0,
       constraintId: -1,
-      quantity: this.dailyMeals
-        .filter((meal) => meal.selected)
-        .map((meal) => ({
-          quantity: this.mealQuantities[meal.id] || 0,
-          mealId: meal.id,
-          menuId: 0,
-        })),
+      quantity: orderItems,
     };
 
     // Create the order

@@ -14,21 +14,28 @@
 
     <div class="center-content">
       <table>
-        <tr *ngFor="let order of userOrders">
-          <td>{{ order.quantity[0]?.meal?.label }}</td>
-          <td>{{ order.quantity[0]?.meal?.priceDF }} €</td>
-          <td>
-            <!-- Delete button to cancel the order -->
-            <ion-button
-              shape="round"
-              fill="clear"
-              color="warning"
-              (click)="cancelOrder(order.id)"
-            >
-              <ion-icon name="trash-outline"></ion-icon>
-            </ion-button>
-          </td>
-        </tr>
+        <ng-container *ngFor="let order of userOrders">
+          <!-- Iterate through each item in the order's quantity array -->
+          <ng-container *ngFor="let item of order.quantity">
+            <tr>
+              <!-- Display meal label and price for each item -->
+              <td>{{ item.meal?.label }}</td>
+              <td>{{ item.meal?.priceDF }} €</td>
+              <td>
+                <!-- Delete button to cancel the order -->
+                <ion-button
+                  shape="round"
+                  fill="clear"
+                  color="warning"
+                  (click)="cancelOrder(order.id)"
+                >
+                  <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
+              </td>
+              <td>x{{ item.quantity }}</td>
+            </tr>
+          </ng-container>
+        </ng-container>
       </table>
     </div>
   </ng-template>

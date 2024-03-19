@@ -5,4 +5,5 @@ export interface Meal {
     category: string;
     edited?: boolean;
     selected?: boolean;
+    quantity?:number
 }
