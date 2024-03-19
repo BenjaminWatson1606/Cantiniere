@@ -1,86 +1,78 @@
 <ion-content>
   <div>
-  <!-- Edit menu -->
-  <form class="form-container" [formGroup]="menuForm" (ngSubmit)="submitMenu()">
-    <!-- Submit button -->
-    <ion-button
-    type="submit"
-    color="warning"
-    [disabled]="!menuForm.valid || menuMeals.length <= 0"
-    [innerHTML]="menu ? 'Valider les modifications' : 'Ajouter un menu'">
-    </ion-button>
-    <!-- User feedbacks -->
-    @if(!menuForm.controls.label.valid){
-      <p class="error-text">Veuillez entrer un intitulé de menu valide.</p>
-    }
-    @else if (!menuForm.controls.price.valid) {
-      <p class="error-text">Veuillez entrer un prix valide pour le menu.</p>
-    }
-    @else if(menuMeals.length <= 0){
-      <p class="error-text">Veuillez au moins ajouter un plat au menu.</p>
-    }
+    <!-- Edit menu -->
+    <form class="form-container" [formGroup]="menuForm" (ngSubmit)="submitMenu()">
+      <!-- Submit button -->
+      <ion-button
+      type="submit"
+      color="warning"
+      [disabled]="!menuForm.valid || menuMeals.length <= 0"
+      [innerHTML]="menu ? 'Valider les modifications' : 'Ajouter un menu'">
+      </ion-button>
+      <!-- User feedbacks -->
+      @if(!menuForm.controls.label.valid){
+        <p class="error-text">Veuillez entrer un intitulé de menu valide.</p>
+      }
+      @else if (!menuForm.controls.price.valid) {
+        <p class="error-text">Veuillez entrer un prix valide pour le menu.</p>
+      }
+      @else if(menuMeals.length <= 0){
+        <p class="error-text">Veuillez au moins ajouter un plat au menu.</p>
+      }
 
-    <!-- Menu label input -->
-    <ion-input
-    type="text"
-    fill="solid"
-    labelPlacement= "floating"
-    [label]= "menu ? 'Intitulé du menu' : 'Intitulé du nouveau menu'"
-    [placeholder]= "menu ? 'Entrez un intitulé de menu' : 'Entrez un intitullé pour le nouveau menu'"
-    formControlName="label"
-    ></ion-input>
-    <!-- Menu price input -->
-    <ion-input 
-    type="number"
-    fill="solid"
-    labelPlacement="floating"
-    min="0" 
-    max="999"
-    [label]= "menu ? 'Prix du menu' : 'Prix du nouveau menu'"
-    [placeholder]= "menu ? 'Entrez un prix de menu' : 'Entrez un prix pour le nouveau menu'"
-    formControlName="price"
-    ></ion-input>
-    <!-- Display menu meals -->
-    <ion-grid class="form-meals">
-      <ion-row class="form-meals-head">
-        <ion-col>Plats :</ion-col>
-      </ion-row>
-      @if (menuMeals && menuMeals.length > 0) {
-        @for (meal of menuMeals; track $index) {
+      <!-- Menu label input -->
+      <ion-input
+      type="text"
+      fill="solid"
+      labelPlacement= "floating"
+      [label]= "menu ? 'Intitulé du menu' : 'Intitulé du nouveau menu'"
+      [placeholder]= "menu ? 'Entrez un intitulé de menu' : 'Entrez un intitullé pour le nouveau menu'"
+      formControlName="label"
+      ></ion-input>
+      <!-- Menu price input -->
+      <ion-input 
+      type="number"
+      fill="solid"
+      labelPlacement="floating"
+      min="0" 
+      max="999"
+      [label]= "menu ? 'Prix du menu' : 'Prix du nouveau menu'"
+      [placeholder]= "menu ? 'Entrez un prix de menu' : 'Entrez un prix pour le nouveau menu'"
+      formControlName="price"
+      ></ion-input>
+      <!-- Display menu meals -->
+      <ion-grid class="form-meals">
+        <ion-row class="form-meals-head">
+          <ion-col>Plats :</ion-col>
+        </ion-row>
+        @if (menuMeals && menuMeals.length > 0) {
+          @for (meal of menuMeals; track $index) {
+            <ion-row>
+              <ion-col>
+                <p>{{ meal.label }}</p>
+              </ion-col>
+              <ion-button
+              color="warning"
+              (click)="removeMealFromMenu($index)">
+                <ion-icon name="trash-outline"/>
+              </ion-button>
+            </ion-row>
+          }
+        }
+        @else{
           <ion-row>
             <ion-col>
-              <p>{{ meal.label }}</p>
+              <p>Ce menu ne contient aucun plat.</p>
             </ion-col>
-            <ion-button
-            color="warning"
-            (click)="removeMealFromMenu($index)">
-              <ion-icon name="trash-outline"/>
-            </ion-button>
           </ion-row>
         }
-      }
-      @else{
-        <ion-row>
-          <ion-col>
-            <p>Ce menu ne contient aucun plat.</p>
-          </ion-col>
-        </ion-row>
-      }
-    </ion-grid>
-  </form>
-</div>
+      </ion-grid>
+    </form>
+  </div>
 
-<!-- Categories buttons -->
-<div *ngIf="categories" class="button-list-container">
-  <ion-list *ngFor="let category of categories" class="button-list">
-    <ion-button
-    size="small"
-      color="warning"
-      [class.selected-button]="category === selectedCategory"
-      (click)="selectMealCategory(category)"
-      >{{ getTemplateName(category) }}
-    </ion-button>
-  </ion-list>
+  <!-- Categories buttons -->
+  <div>
+    <app-meal-categories (onCategorySelected)="getMealCategoryInfos($event)"></app-meal-categories>
   </div>
 
   <!-- Meal list -->

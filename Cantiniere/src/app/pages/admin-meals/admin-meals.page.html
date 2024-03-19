@@ -6,16 +6,10 @@
 
 <ion-content class="body">
   <!-- Category buttons -->
-  <div *ngIf="categories" class="button-list-container">
-    <ion-list *ngFor="let category of categories" class="button-list">
-      <ion-button
-      size="small"
-      color="warning"
-      [class.selected-button]="category === selectedCategory"
-      (click)="selectMealCategory(category)"
-      >{{ getTemplateName(category) }}
-    </ion-button>
-  </ion-list>
+  <div>
+    <app-meal-categories
+    (onCategorySelected)="getMealCategoryInfos($event)"
+    ></app-meal-categories>
   </div>
 
   <!-- Add meals -->
@@ -140,7 +134,7 @@
         <ion-row>
           <ion-col>
             <div class="empty-meal-text">
-              Aucun plat trouvé pour la catégorie {{ getTemplateName(selectedCategory) }}
+              <p>Aucun plat n'a été trouvé.</p>
             </div>
           </ion-col>
         </ion-row>

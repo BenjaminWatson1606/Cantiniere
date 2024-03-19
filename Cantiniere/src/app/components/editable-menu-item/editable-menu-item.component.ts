@@ -14,9 +14,6 @@ export class EditableMenuItemComponent  implements OnInit {
   @Input() menu: Menu | undefined;
 
   meals: Meal[] = [];
-  categories!: string[];
-  
-  selectedCategory!: string;
   selectedMeals: Meal[] | undefined;
 
   //Form properties
@@ -40,40 +37,16 @@ export class EditableMenuItemComponent  implements OnInit {
     }
 
     //Get meals and meal categories
-    this.categories = this.mealService.getMealCategories();
-    this.mealService.getAllMeals().subscribe((data) => {
-      this.meals = data;
-      this.selectMealCategory(this.categories[3]);
-    })
+    this.mealService.getAllMeals().subscribe(
+      (res) => this.meals = res,
+    )
   }
 
   /**
-   * Get the template name of a category
-   * @param category The category to get the template name of
-   * @returns Returns the template name as a string. Example: MAIN_DISHES => Plats Principaux 
+   * Get the category and meals from it
    */
-  getTemplateName(category: string): string {
-    return this.mealService.getTemplateName(category);
-  }
-
-  /**
-   * Select a new category and get its meals
-   * @param category The new selected category
-   */
-  selectMealCategory(category: string){
-    if(this.selectedCategory == category)
-      return;
-
-    this.selectedCategory = category;
-    this.selectedMeals = this.mealService.getMealOfCategory(this.meals, this.selectedCategory);
-  }
-
-  /**
-   * Indicates if the selected category contains any meal or not
-   * @returns Returns if the selected category has atleast one meal
-   */
-  categoryHasMeals(): boolean{
-    return this.selectedMeals != undefined && this.selectedMeals.length > 0;
+  getMealCategoryInfos(event: any){
+    this.selectedMeals = event.meals;
   }
 
   /**
@@ -118,6 +91,11 @@ export class EditableMenuItemComponent  implements OnInit {
     this.menuMeals.splice(id, 1);
   }
 
+  /**
+   * Check if a given meal is included in the menu's meals array
+   * @param meal 
+   * @returns 
+   */
   containsMeal(meal: Meal): boolean{
     return this.menuMeals.findIndex(m => m.label == meal.label) >= 0;
   }

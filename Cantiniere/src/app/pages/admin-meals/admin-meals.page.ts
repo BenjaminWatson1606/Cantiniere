@@ -11,8 +11,6 @@ import { MealService } from 'src/app/services/meal/meal.service';
 export class AdminMealsPage implements OnInit {
 
   meals: Meal[] = [];
-  categories!: string[];
-  
   selectedCategory!: string;
   selectedMeals: Meal[] | undefined;
 
@@ -26,11 +24,9 @@ export class AdminMealsPage implements OnInit {
   ){}
   
   ngOnInit() {
-    this.categories = this.mealService.getMealCategories();
-    this.mealService.getAllMeals().subscribe((data) => {
-      this.meals = data;
-      this.selectMealCategory(this.categories[3]);
-    })
+    this.mealService.getAllMeals().subscribe(
+      (res) => this.meals = res
+    )
   }
 
   /**
@@ -40,18 +36,6 @@ export class AdminMealsPage implements OnInit {
    */
   getTemplateName(category: string): string {
     return this.mealService.getTemplateName(category);
-  }
-
-  /**
-   * Select a new category and get its meals
-   * @param category The new selected category
-   */
-  selectMealCategory(category: string){
-    if(this.selectedCategory == category)
-      return;
-
-    this.selectedCategory = category;
-    this.selectedMeals = this.mealService.getMealOfCategory(this.meals, this.selectedCategory);
   }
 
   /**
@@ -127,6 +111,14 @@ export class AdminMealsPage implements OnInit {
         this.selectedMeals = this.mealService.getMealOfCategory(this.meals, this.selectedCategory);
       }
     );
+  }
+
+  /**
+   * Get the category and meals from it
+   */
+  getMealCategoryInfos(event: any){
+    this.selectedMeals = event.meals;
+    this.selectedCategory = event.category;
   }
 
   /**
