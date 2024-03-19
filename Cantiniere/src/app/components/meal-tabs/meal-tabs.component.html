@@ -1,0 +1,11 @@
+<div *ngIf="categories" class="button-list-container">
+  <ion-list *ngFor="let category of categories" class="button-list">
+    <ion-button
+    size="small"
+      color="warning"
+      [class.selected-button]="category === selectedCategory"
+      (click)="selectMealCategory(category)"
+      >{{ getTemplateName(category) }}
+    </ion-button>
+  </ion-list>
+</div>

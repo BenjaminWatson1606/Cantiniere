@@ -7,6 +7,7 @@ import { MenuItemComponent } from './menu-item/menu-item.component';
 import { EditableMenuItemComponent } from './editable-menu-item/editable-menu-item.component';
 import { OrderCardComponent } from './order-card/order-card.component';
 import { MenuCardComponent } from './menu-card/menu-card.component';
+import { MealCategoriesComponent } from './meal-tabs/meal-tabs.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { MenuCardComponent } from './menu-card/menu-card.component';
     MenuItemComponent,
     EditableMenuItemComponent,
     OrderCardComponent,
+    MealCategoriesComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +28,7 @@ import { MenuCardComponent } from './menu-card/menu-card.component';
     MenuItemComponent,
     EditableMenuItemComponent,
     OrderCardComponent,
+    MealCategoriesComponent,
   ]
 })
 export class MenuModule { }
