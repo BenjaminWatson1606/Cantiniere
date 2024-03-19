@@ -22,9 +22,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminPageModule),
   },
   {
-    path: 'admin-menu',
+    path: 'admin-meals',
     canActivate: [AuthGuard],
-    loadChildren: () => import('./pages/admin-menu/menu.module').then( m => m.MenuPageModule)
+    loadChildren: () => import('./pages/admin-meals/admin-meals.module').then( m => m.AdminMealsPageModule)
+  },
+  {
+    path: 'admin-menus',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/admin-menus/admin-menus.module').then( m => m.AdminMenusPageModule)
   },
   {
     path: 'admin-order-recap',
@@ -41,6 +46,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./pages/admin-configuration/configuration.module').then( m => m.AdminConfigPageModule)
   },
+
 ];
 
 @NgModule({
