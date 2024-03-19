@@ -1,0 +1,40 @@
+<ion-content *ngIf="menus">
+  @if(!isEditing){
+    <div>
+      <!-- Add menu -->
+      <div class="container">
+        <ion-button
+        style="margin-top: 122px;"
+        color="warning"
+        (click)="createNewMenu()">
+          Ajouter un nouveau menu
+        </ion-button>
+      </div>
+      <!-- Menu list -->
+      <div *ngFor="let menu of menus;" class="menu-list">
+        <app-menu-item 
+        [menu]="menu" 
+        [enableEdit]="true"
+        (onEdit)="editMenu($event)"
+        (onDelete)="deleteMenu($event)">
+        </app-menu-item>
+      </div>
+    </div>
+  }
+  @else {
+    <!-- Edit menu -->
+    <div class="fixed-buttons">
+      <ion-button
+      style="padding-left: 1%;"
+      color="warning"
+      (click)="cancelEditing()"
+      >Annuler</ion-button>
+    </div>
+    <app-editable-menu-item
+    [menu]="editedMenu"
+    (onCreate)="addMenu($event)"
+    (onEdit)="updateMenu($event)">
+  </app-editable-menu-item>
+  }
+
+</ion-content>
