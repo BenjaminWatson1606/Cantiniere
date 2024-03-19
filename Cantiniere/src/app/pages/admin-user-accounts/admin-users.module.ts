@@ -6,8 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { AdminUsersPageRoutingModule } from './admin-users-routing.module';
 import { AdminUsersPage } from './admin-users.page';
 import { AdminUsersDetailsComponent } from 'src/app/components/admin-users-details/admin-users-details.component';
-import { OrderCardComponent } from 'src/app/components/order-card/order-card.component';
-import { OrderCardModule } from 'src/app/components/order-card/order-card.module';
+import { MenuModule } from 'src/app/components/menu.module';
 
 @NgModule({
   imports: [
@@ -15,7 +14,7 @@ import { OrderCardModule } from 'src/app/components/order-card/order-card.module
     FormsModule,
     IonicModule,
     AdminUsersPageRoutingModule,
-    OrderCardModule
+    MenuModule
   ],
   declarations: [AdminUsersPage, AdminUsersDetailsComponent]
 })
