@@ -36,9 +36,13 @@ export class MenuService {
     if (!token) return undefined;
 
     const url = 'http://localhost:8080/stone.lunchtime/menu/add';
-    const body = JSON.stringify(menu); 
+    const body = {
+      label: menu.label,
+      priceDF: menu.priceDF,
+      mealIds: this.getMealIds(menu),
+    };
     const headers = this.auth.getHttpHeader(token);
-    return this.http.put(url, body, { headers: headers });
+    return this.http.put(url, JSON.stringify(body), { headers: headers });
   }
 
   /**
@@ -51,14 +55,10 @@ export class MenuService {
 
     const url = `http://localhost:8080/stone.lunchtime/menu/update/${menu.id}`;
     const headers = this.auth.getHttpHeader(token);
-
-    //Convert meals array to an array of meal ids
-    const mealIds: number[] = [];
-    menu.meals.forEach(meal => mealIds.push(meal.id));
     const body = {
       label: menu.label,
       priceDF: menu.priceDF,
-      mealIds: mealIds,
+      mealIds: this.getMealIds(menu),
     };
     return this.http.patch<Menu>(url, JSON.stringify(body), { headers: headers });
   }
@@ -74,5 +74,15 @@ export class MenuService {
     const url = `http://localhost:8080/stone.lunchtime/menu/delete/${menuId}`;
     const headers = this.auth.getHttpHeader(token);
     return this.http.delete<boolean>(url, { headers: headers });
+  }
+
+  /**
+   * Convert meals array to an array of meal ids
+   * @param menu Menu to get meal ids from
+   */
+  getMealIds(menu: Menu): number[]{
+    const mealIds: number[] = [];
+    menu.meals.forEach(meal => mealIds.push(meal.id));
+    return mealIds;
   }
 }
