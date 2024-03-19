@@ -18,6 +18,7 @@ export class PopUpOrderComponent implements OnInit {
   dayNumber: number | undefined;
   mealQuantities: { [key: number]: number } = {};
   userId: number | undefined;
+  isAuthenticated: boolean = false;
 
   constructor(
     private modalController: ModalController,
@@ -31,6 +32,9 @@ export class PopUpOrderComponent implements OnInit {
     // Fetch daily meals
     this.weekNumber = this.getCurrentWeek();
     this.dayNumber = this.getCurrentDayNumber();
+    this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
+      this.isAuthenticated = isAuthenticated;
+    });
 
     if (!this.weekNumber || !this.dayNumber) {
       console.error('Failed to get week number or day number.');
@@ -66,6 +70,12 @@ export class PopUpOrderComponent implements OnInit {
   }
 
   orderItems() {
+    // Check if user is authenticated
+    if (!this.isAuthenticated) {
+      this.errorToast('Il faut se connecter pour passer une commande');
+      return;
+    }
+
     // Collect all selected meals and their quantities
     const selectedMeals = this.dailyMeals.filter((meal) => meal.selected);
     const orderItems = selectedMeals.map((meal) => ({
