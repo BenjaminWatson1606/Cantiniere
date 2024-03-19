@@ -2,7 +2,7 @@ import { CSP_NONCE, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { delay } from 'rxjs';
 
-import { Meal } from 'src/app/interfaces/meal-model';
+import { Meal } from 'src/app/interfaces/meal';
 import { MealService } from 'src/app/services/meal/meal.service';
 
 @Component({

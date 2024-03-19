@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Meal } from 'src/app/interfaces/meal-model';
+import { Meal } from 'src/app/interfaces/meal';
 import { MealService } from 'src/app/services/meal/meal.service';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 import { OrdersService } from 'src/app/services/orders/orders.service';

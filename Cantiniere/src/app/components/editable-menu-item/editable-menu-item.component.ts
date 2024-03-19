@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Meal } from 'src/app/interfaces/meal-model';
+import { Meal } from 'src/app/interfaces/meal';
 import { Menu } from 'src/app/interfaces/menu';
 import { MealService } from 'src/app/services/meal/meal.service';
 

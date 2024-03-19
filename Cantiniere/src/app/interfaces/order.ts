@@ -1,4 +1,4 @@
-import { Meal } from "./meal-model";
+import { Meal } from "./meal";
 
 export interface Order {
     id: number;
