@@ -13,7 +13,7 @@ import { MenuCardComponent } from './components/menu-card/menu-card.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
-  declarations: [AppComponent, MenuCardComponent, NavbarComponent],
+  declarations: [AppComponent, NavbarComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

@@ -6,9 +6,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { EditableMenuItemComponent } from './editable-menu-item/editable-menu-item.component';
 import { OrderCardComponent } from './order-card/order-card.component';
+import { MenuCardComponent } from './menu-card/menu-card.component';
 
 @NgModule({
   declarations: [
+    MenuCardComponent,
     MenuItemComponent,
     EditableMenuItemComponent,
     OrderCardComponent,
@@ -20,6 +22,7 @@ import { OrderCardComponent } from './order-card/order-card.component';
     ReactiveFormsModule
   ],
   exports: [
+    MenuCardComponent,
     MenuItemComponent,
     EditableMenuItemComponent,
     OrderCardComponent,
