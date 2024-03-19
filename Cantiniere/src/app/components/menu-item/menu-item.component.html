@@ -1,0 +1,28 @@
+<ion-card class="container">
+  <ion-card-header>
+    <ion-card-title>{{ menu.label }} ({{ menu.priceDF }})€</ion-card-title>
+    <div *ngIf="enableEdit">
+      <ion-button
+      color="warning"
+      (click)="sendEditRequest()">
+        <ion-icon name="create-outline"/>
+      </ion-button>
+      <ion-button
+      color="warning"
+      (click)="sendDeleteRequest()">
+        <ion-icon name="trash-outline"/>
+      </ion-button>
+    </div>
+  </ion-card-header>
+
+  <ion-card-content>
+    @if(menu.meals && menu.meals.length > 0){
+      @for (meal of menu.meals; track $index) {
+        <p>{{ meal.label }} ({{ meal.priceDF }})€</p>
+      }
+    }
+    @else {
+      <p class="error-text">Ce menu ne contient aucun plat.</p>
+    }
+  </ion-card-content>
+</ion-card>
