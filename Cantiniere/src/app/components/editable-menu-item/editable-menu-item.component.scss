@@ -1,0 +1,70 @@
+//Form css classes
+.form-container{
+    width: 50%;
+    padding: 1%;
+    flex-direction: column;
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(162, 162, 162);
+}
+
+.form-meals{
+    width: 100%;
+    text-align: center;
+}
+
+.form-meals-head{
+    color: white;
+    background-color: rgb(22, 22, 22);
+}
+
+.form-meals > ion-row {
+    border: solid;
+    border-width: 2px;
+    border-color: rgb(22, 22, 22);
+}
+
+//Buttons css classes
+.button-list-container{
+    width: 100%;
+    height: auto;
+    margin-top: 1%;
+}
+
+.button-list{
+    display: inline-block;
+    padding: 0%;
+    margin-top: 1%;
+    margin-bottom: 0.5%;
+}
+
+.selected-button{
+    border: solid;
+    border-color: rgb(255, 153, 0);
+    border-width: 1%;
+    font-weight: bold;
+}
+
+//Meal grid css classes
+ion-content > div, .form-container, .meal-grid > ion-row > ion-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.meal-grid{
+    width: 75%;
+}
+
+.meal-grid > ion-row > ion-col{
+    flex-direction: row;
+    text-align: center;
+    border: solid;
+    border-color: rgb(124, 124, 124);
+    border-width: 1px;
+}
+
+.error-text{
+    color: rgb(255, 31, 31);
+    font-weight: bold;
+}
