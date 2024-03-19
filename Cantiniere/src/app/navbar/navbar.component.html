@@ -16,11 +16,15 @@
     </ion-button>
     <ion-buttons slot="start">
       <ion-button
-      shape="round" 
-      fill="solid" 
-      color="warning"
-      (click)="loadPage('menu')"
-      >Plat de la semaine</ion-button
+        shape="round"
+        fill="solid"
+        color="warning"
+        (click)="loadMainPage()"
+        > {{
+          isAuthenticated && (getUserRole() | async) === "ROLE_LUNCHLADY"
+            ? "Gestion des menus"
+            : "Plat de la semaine"
+        }}</ion-button
       >
 
       <ion-button
@@ -29,17 +33,23 @@
         fill="solid"
         color="warning"
         (click)="loadMealsPage()"
-        >Gestion des plats</ion-button
       >
+        {{
+          isAuthenticated && (getUserRole() | async) === "ROLE_LUNCHLADY"
+            ? "Gestion des plats"
+            : "Carte"
+        }}
+      </ion-button>
 
-      <ion-button *ngIf="isAuthenticated && (getUserRole() | async) !== 'ROLE_LUNCHLADY'"
-      class="button-nav"
-      shape="round"
-      fill="solid"
-      color="warning"
-      (click)="loadPage('user-account')"
-      >Mon compte</ion-button
-    >
+      <ion-button
+        *ngIf="isAuthenticated && (getUserRole() | async) !== 'ROLE_LUNCHLADY'"
+        class="button-nav"
+        shape="round"
+        fill="solid"
+        color="warning"
+        (click)="loadPage('user-account')"
+        >Mon compte</ion-button
+      >
 
       <ion-button
         *ngIf="(getUserRole() | async) === 'ROLE_LUNCHLADY'"
@@ -68,11 +78,15 @@
         fill="solid"
         color="warning"
         (click)="loadPage('admin-configuration')"
-      > Configuration
+      >
+        Configuration
       </ion-button>
     </ion-buttons>
     <div class="white_text" slot="end">
-      ⏱︎ Commandes acceptées jusqu'à {{ (configuration$ | async)?.orderTimeLimit?.replace(':', 'h')?.slice(0, 5)}}
+      ⏱︎ Commandes acceptées jusqu'à
+      {{
+        (configuration$ | async)?.orderTimeLimit?.replace(":", "h")?.slice(0, 5)
+      }}
     </div>
     <!-- {{getOrderLimit() | date:'h:mm a'}} -->
     <ion-buttons slot="end">
@@ -129,14 +143,14 @@
         Bonjour {{ getFirstName() | async }}
       </p>
 
-      <ion-button *ngIf="!isAuthenticated || (getUserRole() | async) !== 'ROLE_LUNCHLADY'"
+      <ion-button
+        *ngIf="!isAuthenticated || (getUserRole() | async) !== 'ROLE_LUNCHLADY'"
         shape="round"
         fill="solid"
         color="warning"
-        (click)="openCartModal()">
-        <ion-icon
-        size="large"
-        name="cart-outline"/>
+        (click)="openCartModal()"
+      >
+        <ion-icon size="large" name="cart-outline" />
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

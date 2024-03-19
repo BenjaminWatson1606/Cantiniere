@@ -4,6 +4,7 @@ import { Meal } from 'src/app/interfaces/meal';
 import { MealService } from 'src/app/services/meal/meal.service';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 import { OrdersService } from 'src/app/services/orders/orders.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-pop-up-order',
@@ -22,7 +23,8 @@ export class PopUpOrderComponent implements OnInit {
     private modalController: ModalController,
     private mealService: MealService,
     private ordersService: OrdersService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private toastController: ToastController
   ) {}
 
   async ngOnInit() {
@@ -64,27 +66,64 @@ export class PopUpOrderComponent implements OnInit {
   }
 
   orderItems() {
-    // Filter selected meals and create payload
-    const selectedMeals = this.dailyMeals.filter((meal) => meal.selected);
+    // Calculate total quantity of selected meals
+    const totalQuantity = this.dailyMeals
+      .filter((meal) => meal.selected)
+      .reduce((total, meal) => total + (this.mealQuantities[meal.id] || 0), 0);
+
+    // If total quantity is 0, don't proceed with the order
+    if (totalQuantity === 0) {
+      this.errorToast('Il faut ajouter au moins un plat ou menu pour commander');
+      console.log('No items selected for order.');
+      return;
+    }
+
+    // Prepare order payload
     const orderPayload = {
       userId: this.userId || 0,
       constraintId: -1,
-      quantity: selectedMeals.map((meal) => ({
-        quantity: this.mealQuantities[meal.id] || 0,
-        mealId: meal.id,
-        menuId: 0,
-      })),
+      quantity: this.dailyMeals
+        .filter((meal) => meal.selected)
+        .map((meal) => ({
+          quantity: this.mealQuantities[meal.id] || 0,
+          mealId: meal.id,
+          menuId: 0,
+        })),
     };
 
+    // Create the order
     this.ordersService.createOrder(orderPayload).subscribe(
       () => {
         console.log('Order created successfully.');
+        this.presentToast('Commande validée');
         this.modalController.dismiss();
       },
       (error) => {
         console.error('Failed to create order:', error);
       }
     );
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      position: 'bottom',
+      color: 'success',
+      cssClass: 'toast-custom-class',
+    });
+    toast.present();
+  }
+
+  async errorToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      position: 'bottom',
+      color: 'danger',
+      cssClass: 'toast-custom-error-class',
+    });
+    toast.present();
   }
 
   incrementQuantity(meal: Meal) {

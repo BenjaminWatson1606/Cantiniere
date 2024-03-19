@@ -1,29 +1,29 @@
-// HEADER
-// header color
+/* HEADER */
+/* header color */
 .header {
     --background: rgb(29, 29, 29) !important;
 }
 
-
-// header logo
+/* header logo */
 .logo {
     margin-left: 10px;
 }
 
-// header text
+/* header text */
 .white_text {
     color: white;
     font-size: 14px !important;
     margin-right: 10px;
 }
 
-// table
+/* table */
 .center-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    padding-top: 7%;
+    padding-bottom: 7%;
 }
 
 table {
@@ -50,9 +50,10 @@ td {
     color: white;
 }
 
-
 .cells {
     text-align: center;
+    width: 80%; 
+    margin: 0 auto;
 }
 
 .tableFirstRow {
@@ -60,7 +61,7 @@ td {
     font-weight: bolder;
 }
 
-// filter 
+/* filter */
 .arrow {
     display: inline-block;
     width: 0;
@@ -75,16 +76,15 @@ td {
     border-width: 0 4px 5px 4px;
 }
 
-// quantity
 .quantity {
     border: 1px solid black;
-    width: 50%;
+    width: 50%; 
     height: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    margin-top: 20px;
+    margin-top: 10px; /* Adjust as needed */
 }
 
 .quantity span {
@@ -99,3 +99,11 @@ td {
 .right {
     text-align: right;
 }
+
+.padding {
+    padding-top: 10%;
+}
+
+ion-input {
+    --ion-background-color: white;
+  }

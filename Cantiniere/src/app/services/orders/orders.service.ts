@@ -122,4 +122,62 @@ export class OrdersService {
       .put(url, orderPayload, { headers: headers })
       .pipe(catchError((error) => throwError(error)));
   }
+
+  getOrdersForUser(userId: number): Observable<Order[]> | undefined {
+    const token = this.auth.getUserToken();
+    if (!token) return undefined;
+
+    const headers = this.auth.getHttpHeader(token);
+    const url = `http://localhost:8080/stone.lunchtime/order/findallforusertoday/${userId}`;
+
+    return this.http
+      .get(url, { headers: headers })
+      .pipe(map((res) => res as Order[]));
+  }
+
+  getAllOrders(): Observable<Order[]> | undefined {
+    const token = this.auth.getUserToken();
+    if (!token) return undefined;
+
+    const headers = this.auth.getHttpHeader(token);
+    const url = 'http://localhost:8080/stone.lunchtime/order/findall';
+
+    return this.http
+      .get(url, { headers: headers })
+      .pipe(map((res) => res as Order[]));
+  }
+
+  cancelOrder(orderId: number): Observable<any> {
+    const token = this.auth.getUserToken();
+    if (!token) {
+      return throwError('User token not available.');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    const url = `http://localhost:8080/stone.lunchtime/order/cancel/${orderId}`;
+
+    return this.http
+      .patch(url, {}, { headers: headers })
+      .pipe(catchError((error) => throwError(error)));
+  }
+
+  deliverAndPay(orderId: number): Observable<any> {
+    const token = this.auth.getUserToken();
+    if (!token) {
+      return throwError('User token not available.');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    const url = `http://localhost:8080/stone.lunchtime/order/deliverandpay/${orderId}/1`;
+
+    return this.http
+      .patch(url, {}, { headers: headers })
+      .pipe(catchError((error) => throwError(error)));
+  }
 }

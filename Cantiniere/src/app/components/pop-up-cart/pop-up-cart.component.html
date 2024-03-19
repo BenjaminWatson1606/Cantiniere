@@ -1,36 +1,63 @@
 <!-- ORDER DISCONNECTED USER POP UP -->
-<div class="header-title">Jour</div>
+<div class="header-title">{{ currentDay }}</div>
 <ion-content>
-  <!-- If the user is not connected this message appears -->
-  <p class="center-text">⚠️ Merci de vous connecter pour valider votre commande</p>
-  <!-- Else if the user is connected his "cagnotte" appears-->
-  <p class="cagnotte">Cagnotte : €</p>
-  <div class="center-content">
-    <!-- ORDER DISCONNECTED USER TABLE -->
-    <!-- TODO FAIRE LE LIEN AVEC LE BACK ET LE BINDING -->
-    <table>
-      <!-- Day 1 -->
-      <tr>
-        <td class="dayText">Day 1</td>
-      </tr>
-      <tr>
-        <td>Plat 1</td>
-        <td>Qty : </td>
-        <td>Sous-total : €</td>
-        <td>
-          <ion-button shape="round" fill="solid" color="warning">
-            <ion-icon name="trash-bin-outline"></ion-icon>
-          </ion-button>
-        </td>
-      </tr>
-    </table>
-  </div>
+  <ng-container *ngIf="!isAuthenticated; else connectedUserContent">
+    <!-- If the user is not authenticated, display a message -->
+    <p class="center-text">
+      ⚠️ Merci de vous connecter pour valider votre commande
+    </p>
+  </ng-container>
+
+  <ng-template #connectedUserContent>
+    <!-- If the user is authenticated, display user orders -->
+    <p class="cagnotte">Cagnotte : {{ user?.wallet || "N/A" }} €</p>
+
+    <div class="center-content">
+      <table>
+        <tr *ngFor="let order of userOrders">
+          <td>{{ order.quantity[0]?.meal?.label }}</td>
+          <td>{{ order.quantity[0]?.meal?.priceDF }} €</td>
+          <td>
+            <!-- Delete button to cancel the order -->
+            <ion-button
+              shape="round"
+              fill="clear"
+              color="warning"
+              (click)="cancelOrder(order.id)"
+            >
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </ng-template>
 </ion-content>
+
 <div>
-  <ion-button shape="round" fill="solid" color="dark" [disabled]="true">Total : €</ion-button>
+  <!-- If the user is connected, display the total -->
+  <ng-container *ngIf="isAuthenticated">
+    <div class="total-price">
+      Total: {{ totalOrderPrice | currency : "EUR" }}
+    </div>
+  </ng-container>
 </div>
 <div class="popUpCartButton">
-  <ion-button shape="round" fill="solid" color="light" (click)="closeCartModal()">Annuler</ion-button>
-  <!-- If the user is connected, then they may validate their order -->
-  <ion-button shape="round" fill="solid" color="warning" (click)="validateOrder()">Valider</ion-button>
+  <ion-button
+    shape="round"
+    fill="solid"
+    color="light"
+    (click)="closeCartModal()"
+    >Annuler</ion-button
+  >
+  <!-- If the user is connected, display the validation button -->
+  <ng-container *ngIf="isAuthenticated">
+    <ion-button
+      shape="round"
+      fill="solid"
+      color="warning"
+      (click)="validateOrder()"
+      >Valider</ion-button
+    >
+  </ng-container>
 </div>

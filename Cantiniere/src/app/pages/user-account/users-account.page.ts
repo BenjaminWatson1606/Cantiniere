@@ -16,7 +16,7 @@ import { OrdersService } from 'src/app/services/orders/orders.service';
 })
 export class UsersAccountPage implements OnInit {
 
-  user!: User;
+  user: User | undefined;
   orders: Order[] = [];
 
   constructor(

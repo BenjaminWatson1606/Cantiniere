@@ -7,6 +7,7 @@ import {
 import { LoginService } from '../../../services/auth/login.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -45,8 +46,15 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.email, this.password).subscribe(
         (response) => {
           console.log('Login response:', response);
-          this.redirectUser();
           this.presentSuccessToast('Connexion réussi');
+          this.getUserRole().subscribe(role => {
+            if (role === 'ROLE_LUNCHLADY') {
+              
+              this.router.navigateByUrl("/admin-menus");
+            }else{
+              this.router.navigateByUrl("/menu");
+            }
+          });
         },
         (error) => {
           console.error('Login error:', error);
@@ -86,6 +94,10 @@ export class LoginComponent implements OnInit {
   async closeModal() {
     await this.modalController.dismiss();
   }
+
+  getUserRole(): Observable<string | null> {
+    return this.authService.getUserRole();
+  }
   
   @Output() registerClicked = new EventEmitter<{ role: string }>();
 
@@ -94,7 +106,5 @@ export class LoginComponent implements OnInit {
     this.modalController.dismiss({ role: 'register' });
   }
 
-  redirectUser(){
-    this.router.navigateByUrl("/menu");
-  }
+  
 }

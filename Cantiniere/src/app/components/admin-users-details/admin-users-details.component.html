@@ -4,57 +4,65 @@
   <div class="right-content">
     <p class="cagnotte">Cagnotte : {{ user.wallet }}€</p>
 
-    <ion-button 
-    shape="round" 
-    fill="solid" 
-    color="warning" 
-    (click)="toggleInputField()"
-    >Créditer</ion-button>
+    <ion-button
+      shape="round"
+      fill="solid"
+      color="warning"
+      (click)="toggleCreditInputField()"
+    >
+      Créditer
+    </ion-button>
     <!-- Input field to appear when the button is clicked -->
-    <ion-item *ngIf="showInputField">
+    <ion-item *ngIf="showCreditInputField">
       <ion-label position="floating">Entrer le montant du crédit</ion-label>
-      <ion-input 
-      type="number"
-      min="0"
-      max="999"
-      required
-      [(ngModel)]="credit"
-      #creditInput="ngModel">
-      </ion-input>
-      <ion-button 
-      shape="round" 
-      fill="solid" 
-      color="warning" 
-      (click)="presentCreditDialog()"
-      [disabled]="!creditInput.valid"
-      >Confirmer</ion-button>
+      <ion-input
+        type="number"
+        min="0"
+        max="999"
+        required
+        [(ngModel)]="creditAmount"
+        #creditInput="ngModel"
+      ></ion-input>
+      <ion-button
+        shape="round"
+        fill="solid"
+        color="warning"
+        (click)="presentCreditDialog()"
+        [disabled]="!creditInput.valid"
+      >
+        Confirmer
+      </ion-button>
     </ion-item>
 
-    <ion-button 
-    shape="round" 
-    fill="solid" 
-    color="warning" 
-    (click)="toggleInputField()"
-    >Solder le compte</ion-button>
+    <ion-button
+      shape="round"
+      fill="solid"
+      color="warning"
+      (click)="toggleDebitInputField()"
+    >
+      Solder le compte
+    </ion-button>
     <!-- Input field to appear when the button is clicked -->
-    <ion-item *ngIf="showInputField">
+    <ion-item *ngIf="showDebitInputField">
       <ion-label position="floating">Entrer le montant du solde</ion-label>
       <ion-input
-      label=" ="
-      type="number"
-      min="0"
-      max="999"
-      required
-      [(ngModel)]="sold"
-      #soldInput="ngModel">
-      </ion-input>
-      <ion-button 
-      shape="round" 
-      fill="solid" 
-      color="warning" 
-      (click)="presentPayDialog()"
-      [disabled]="!soldInput.valid"
-      >Confirmer</ion-button>
+        label=" ="
+        type="number"
+        min="0"
+        max="999"
+        required
+        [(ngModel)]="debitAmount"
+        #debitInput="ngModel"
+      ></ion-input>
+      <ion-button
+        shape="round"
+        fill="solid"
+        color="warning"
+        (click)="presentDebitDialog()"
+        [disabled]="!debitInput.valid"
+      >
+        Confirmer
+      </ion-button>
     </ion-item>
   </div>
   <div>
@@ -67,17 +75,20 @@
   <div class="recap-square">
     <h3>Commande en cours</h3>
     <div class="recap-content">
-      @if(orders && orders.length > 0){
-        @for (order of orders; track $index) {
-          <app-order-card [order]="order"></app-order-card>
-        }
-      }
-      @else {
-        <p>Aucune commande en cours.</p>
+      @if(orders && orders.length > 0){ @for (order of orders; track $index) {
+      <app-order-card [order]="order"></app-order-card>
+      } } @else {
+      <p>Aucune commande en cours.</p>
       }
     </div>
   </div>
 </ion-content>
 <div class="cancelButton">
-  <ion-button shape="round" fill="solid" color="light" (click)="closeUsersDetailsModal()">Fermer</ion-button>
+  <ion-button
+    shape="round"
+    fill="solid"
+    color="light"
+    (click)="closeUsersDetailsModal()"
+    >Fermer</ion-button
+  >
 </div>
