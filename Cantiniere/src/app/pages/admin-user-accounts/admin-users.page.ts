@@ -49,6 +49,10 @@ export class AdminUsersPage implements OnInit {
    * Apply search bar filter and get an array of user as result
    */
   applyFilter(){
-    this.searchResult = this.users.filter(u => u.name === this.searchTerm || u.firstname === this.searchTerm);
+    this.searchResult = this.users.filter(
+      u => u.name == this.searchTerm || 
+      u.firstname == this.searchTerm ||
+      u.name.toLowerCase() == this.searchTerm ||
+      u.firstname.toLowerCase() == this.searchTerm);
   }
 }
