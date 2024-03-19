@@ -129,13 +129,17 @@ export class PopUpCartComponent implements OnInit {
 
   calculateTotalOrderPrice() {
     this.totalOrderPrice = this.userOrders.reduce((total, order) => {
-      
       const orderPrice = order.quantity.reduce((subtotal, item) => {
         return subtotal + (item.meal?.priceDF || 0) * (item.quantity || 0);
       }, 0);
 
-     
       return total + orderPrice;
+    }, 0);
+  }
+
+  calculateOrderItemsTotal(items: any[]): number {
+    return items.reduce((total, item) => {
+      return total + (item.meal?.priceDF || 0) * (item.quantity || 0);
     }, 0);
   }
 
