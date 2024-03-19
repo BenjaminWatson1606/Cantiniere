@@ -27,6 +27,10 @@ export class MenuService {
       .pipe(map(menus => menus.filter(menu => menu.status === "ENABLED" || menu.status === "DISABLED")));
   }
 
+  /**
+   * Add a given menu into the database
+   * @returns Returns an observable to get the response or undefined 
+   */
   addMenu(menu: Menu): Observable<any> | undefined {
     const token = this.auth.getUserToken();
     if (!token) return undefined;
@@ -37,6 +41,10 @@ export class MenuService {
     return this.http.put(url, body, { headers: headers });
   }
 
+  /**
+   * Update a given menu from the database using an index
+   * @returns Returns the updated version of the menu or undefined
+   */
   updateMenu(menu: Menu): Observable<Menu> | undefined {
     const token = this.auth.getUserToken();
     if (!token) return undefined;
@@ -55,6 +63,10 @@ export class MenuService {
     return this.http.patch<Menu>(url, JSON.stringify(body), { headers: headers });
   }
 
+  /**
+   * Remove a menu from the database using an index
+   * @returns Returns an observable with the response or undefined
+   */
   deleteMenu(menuId: number): Observable<boolean> | undefined {
     const token = this.auth.getUserToken();
     if (!token) return undefined;
