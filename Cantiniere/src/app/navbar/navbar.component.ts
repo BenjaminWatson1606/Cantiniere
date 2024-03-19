@@ -130,7 +130,7 @@ export class NavbarComponent implements OnInit {
     let url =
       !this.isAuthenticated || !this.UserHasRole('ROLE_LUNCHLADY')
         ? 'menu'
-        : 'admin';
+        : 'admin-menus';
     this.router.navigateByUrl(url);
   }
 
@@ -138,11 +138,11 @@ export class NavbarComponent implements OnInit {
    * Load card menu page based on the user role
    * Open menu pop up for default users and load 'admin-menu' page for admins
    */
-  loadMenuPage() {
+  loadMealsPage() {
     if (!this.isAuthenticated || !this.UserHasRole('ROLE_LUNCHLADY')) {
       this.openMenuCard();
     } else {
-      this.router.navigateByUrl('admin-menu');
+      this.router.navigateByUrl('admin-meals');
     }
   }
   //#endregion

@@ -28,8 +28,8 @@
         shape="round"
         fill="solid"
         color="warning"
-        (click)="loadMenuPage()"
-        >Carte</ion-button
+        (click)="loadMealsPage()"
+        >Gestion des plats</ion-button
       >
 
       <ion-button *ngIf="isAuthenticated && (getUserRole() | async) !== 'ROLE_LUNCHLADY'"
