@@ -1,16 +1,14 @@
-import { CSP_NONCE, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
-import { delay } from 'rxjs';
-
 import { Meal } from 'src/app/interfaces/meal';
 import { MealService } from 'src/app/services/meal/meal.service';
 
 @Component({
   selector: 'app-menu',
-  templateUrl: './menu.page.html',
-  styleUrls: ['./menu.page.scss'],
+  templateUrl: './admin-meals.page.html',
+  styleUrls: ['./admin-meals.page.scss'],
 })
-export class MenuPage implements OnInit {
+export class AdminMealsPage implements OnInit {
 
   meals: Meal[] = [];
   categories!: string[];

@@ -4,9 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MenuPageRoutingModule } from './menu-routing.module';
-
-import { MenuPage } from './menu.page';
+import { MenuPageRoutingModule } from './admin-meals-routing.module';
+import { AdminMealsPage } from './admin-meals.page';
 
 @NgModule({
   imports: [
@@ -15,6 +14,6 @@ import { MenuPage } from './menu.page';
     IonicModule,
     MenuPageRoutingModule
   ],
-  declarations: [MenuPage]
+  declarations: [AdminMealsPage]
 })
-export class MenuPageModule {}
+export class AdminMealsPageModule {}
