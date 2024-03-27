@@ -19,7 +19,6 @@
             <td>{{ item.meal?.priceDF }} €</td>
             <td>x{{ item.quantity }}</td>
           </tr>
-          <!-- Add a row to display the total for the items in the order -->
           <tr>
             <td colspan="2"></td>
             <td>Total: {{ calculateOrderItemsTotal(order.quantity) | currency : "EUR" }}</td>
@@ -53,18 +52,9 @@
   <ion-button
     shape="round"
     fill="solid"
-    color="light"
+    color="warning"
     (click)="closeCartModal()"
-    >Annuler</ion-button
+    >Valider</ion-button
   >
-  <!-- If the user is connected, display the validation button -->
-  <ng-container *ngIf="isAuthenticated">
-    <ion-button
-      shape="round"
-      fill="solid"
-      color="warning"
-      (click)="validateOrder()"
-      >Valider</ion-button
-    >
-  </ng-container>
+ 
 </div>
